@@ -17,6 +17,8 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 RAW_DATA_PATH = os.path.join("data", "raw_data.json")
 REVIEWS_DATA_PATH = os.path.join("data", "reviews_data.json")
+PLAYSTORE_DATA_PATH = os.path.join("data", "playstore_data.json")
+MANUAL_DATA_PATH = os.path.join("data", "manual_data.json")
 ANALYZED_DATA_PATH = os.path.join("data", "analyzed_data.json")
 
 # Keep the full EHR roster so zero-mention vendors still appear downstream.
@@ -141,16 +143,18 @@ def analyze():
 
     mentions = list(raw.get("mentions", []))
 
-    # Optionally fold in free App Store reviews (reviews.py). Same schema, so
-    # they flow through sentiment + theme analysis like any other mention.
-    n_reviews = 0
-    if os.path.exists(REVIEWS_DATA_PATH):
-        with open(REVIEWS_DATA_PATH, "r", encoding="utf-8") as fh:
-            rev = json.load(fh)
-        review_mentions = rev.get("reviews", [])
-        mentions.extend(review_mentions)
-        n_reviews = len(review_mentions)
-        print(f"Merged {n_reviews} App Store reviews into analysis.")
+    # Optionally fold in free app-store reviews (reviews.py = Apple,
+    # playstore.py = Google Play). Same schema, so they flow through sentiment +
+    # theme analysis like any other mention.
+    for label, path in (("App Store", REVIEWS_DATA_PATH),
+                        ("Google Play", PLAYSTORE_DATA_PATH),
+                        ("manual (G2/Capterra/etc)", MANUAL_DATA_PATH)):
+        if os.path.exists(path):
+            with open(path, "r", encoding="utf-8") as fh:
+                extra = json.load(fh)
+            extra_mentions = extra.get("reviews", [])
+            mentions.extend(extra_mentions)
+            print(f"Merged {len(extra_mentions)} {label} reviews into analysis.")
 
     sia = SentimentIntensityAnalyzer()
 

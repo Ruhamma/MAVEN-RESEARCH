@@ -108,6 +108,8 @@ def find_apps(ehr, cfg):
 
 def parse_review_entry(entry, ehr, app):
     """Normalize one RSS review entry into the shared mention schema."""
+    if not isinstance(entry, dict):
+        return None
     try:
         rating = int(entry.get("im:rating", {}).get("label", 0))
     except (ValueError, TypeError):
@@ -151,6 +153,9 @@ def fetch_reviews(app):
         if not payload:
             break
         entries = payload.get("feed", {}).get("entry", [])
+        # Apple returns a single review as a dict, not a list — normalize.
+        if isinstance(entries, dict):
+            entries = [entries]
         if not entries:
             break
         # On page 1 the first entry is app metadata, not a review.
@@ -192,7 +197,11 @@ def main():
             ar = app.get("avg_rating")
             print(f"  app '{app['name']}' "
                   f"(official {ar}★ / {rc} ratings)")
-            revs = fetch_reviews(app)
+            try:
+                revs = fetch_reviews(app)
+            except Exception as exc:        # never let one app abort the run
+                print(f"    skipped app ({exc})")
+                revs = []
             added = 0
             for r in revs:
                 if r["id"] and r["id"] in seen_ids:

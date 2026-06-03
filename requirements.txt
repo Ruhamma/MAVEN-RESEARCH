@@ -3,3 +3,4 @@ pandas
 nltk
 plotly
 streamlit
+google-play-scraper

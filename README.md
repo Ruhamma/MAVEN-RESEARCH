@@ -12,10 +12,20 @@ DrChrono, ModMed (Modernizing Medicine), Practice Fusion, CharmHealth.
 ## Pipeline
 
 ```
-fetch.py   ->  data/raw_data.json       (Reddit mentions, cached)
-analyze.py ->  data/analyzed_data.json  (sentiment + themes, aggregated)
-dashboard.py (Streamlit, reads analyzed_data.json — never hits the API)
+fetch.py          ->  data/raw_data.json        (Reddit via PullPush)
+reviews.py        ->  data/reviews_data.json    (Apple App Store — FREE)
+playstore.py      ->  data/playstore_data.json  (Google Play — FREE)
+manual_reviews.py ->  data/manual_data.json     (G2/Capterra/etc CSV import)
+chpl.py           ->  data/chpl_data.json       (ONC cert data — free key)
+analyze.py        ->  data/analyzed_data.json   (sentiment + themes; merges all)
+dashboard.py      (Streamlit; reads the JSON files — never hits an API on load)
 ```
+
+Data sources (all free):
+- **Reddit** via PullPush — no key.
+- **Apple App Store** reviews via iTunes Search + RSS — no key, official, real
+  1-5★ ratings. `reviews.py` folds these into the same sentiment/theme pipeline.
+- **ONC CHPL** certified-product registry — free API key required (see below).
 
 ## Setup
 
@@ -37,10 +47,23 @@ python -c "import nltk; nltk.download('vader_lexicon')"
 #    Delete data/raw_data.json to force a fresh pull.
 python fetch.py
 
-# 2. Sentiment + theme analysis (writes data/analyzed_data.json).
+# 2. (Optional, FREE) Pull app-store reviews — adds real star ratings.
+python reviews.py        # Apple App Store
+python playstore.py      # Google Play
+
+# 2b. (Optional) Import hand-collected G2/Capterra/etc reviews:
+#      drop CSVs in data/manual_reviews/ (see TEMPLATE.csv), then:
+python manual_reviews.py
+
+# 3. (Optional) Pull ONC CHPL certified-product data — needs a free key:
+#      get key at https://chpl.healthit.gov/#/resources/api
+#      export CHPL_API_KEY=your-key   (or put it in chpl_api_key.txt)
+python chpl.py
+
+# 4. Sentiment + theme analysis (merges reviews if present).
 python analyze.py
 
-# 3. Launch the dashboard.
+# 5. Launch the dashboard.
 streamlit run dashboard.py
 ```
 
@@ -51,8 +74,17 @@ streamlit run dashboard.py
 - **Per-System** — pick one EHR: sentiment breakdown, top complaints/praises,
   and a scrollable table of real sample quotes with clickable Reddit links.
   Usernames are never shown.
+- **Churn Signals** — mentions with switching/leaving language ("switching
+  from", "looking for an alternative to"). High counts = vendors actively
+  losing customers → poaching targets, with quotes as sales evidence.
+- **Complaint Heatmap** — EHR × complaint-theme matrix. A theme hot across ALL
+  vendors = a universal unmet need = the market gap. Auto-flags the biggest one.
 - **Comparison** — side-by-side table of all 8 EHRs: mentions, % positive,
   % negative, avg sentiment, top complaint, top praise.
+- **App Store** — official weighted avg star rating per EHR, plus sample
+  reviews with stars next to VADER sentiment (ground-truth check).
+- **Market Presence** — ONC CHPL: certified products, active vs declined
+  certifications, latest cert date.
 - **Gap Analysis** — competitor weakness → MavenMD opportunity, loaded from
   `data/gaps.csv` (edit that file freely; not hardcoded).
 

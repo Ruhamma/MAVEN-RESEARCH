@@ -9,6 +9,7 @@ Run:  streamlit run dashboard.py
 
 import json
 import os
+from collections import Counter
 from datetime import datetime, timezone
 
 import pandas as pd
@@ -20,6 +21,7 @@ ANALYZED_DATA_PATH = os.path.join("data", "analyzed_data.json")
 GAPS_CSV_PATH = os.path.join("data", "gaps.csv")
 CHPL_DATA_PATH = os.path.join("data", "chpl_data.json")
 REVIEWS_DATA_PATH = os.path.join("data", "reviews_data.json")
+PLAYSTORE_DATA_PATH = os.path.join("data", "playstore_data.json")
 
 LOW_VOLUME_THRESHOLD = 15  # below this, interpret cautiously
 
@@ -67,6 +69,14 @@ def load_reviews():
         return json.load(fh)
 
 
+@st.cache_data
+def load_playstore():
+    if not os.path.exists(PLAYSTORE_DATA_PATH):
+        return None
+    with open(PLAYSTORE_DATA_PATH, "r", encoding="utf-8") as fh:
+        return json.load(fh)
+
+
 def fmt_epoch(epoch):
     if not epoch:
         return "n/a"
@@ -98,6 +108,27 @@ def top_theme_label(theme_list):
         return "—"
     name, count = theme_list[0]
     return f"{name} ({count})"
+
+
+# Source ordering / labels for mixed-source quote tables.
+_SOURCE_RANK = {"appstore": 0, "googleplay": 1, "manual": 2, "reddit": 3}
+
+
+def source_rank(source):
+    s = (source or "reddit")
+    base = s.split(":", 1)[0]   # "manual:G2" -> "manual"
+    return _SOURCE_RANK.get(base, 4)
+
+
+def source_label(m):
+    s = m.get("source") or "reddit"
+    if s == "appstore":
+        return "App Store"
+    if s == "googleplay":
+        return "Google Play"
+    if s.startswith("manual"):
+        return s.split(":", 1)[1] if ":" in s else "manual"
+    return "r/" + m.get("subreddit", "")
 
 
 # --------------------------------------------------------------------------- #
@@ -247,74 +278,124 @@ def view_heatmap(data):
             "Everyone fails here. Wedge candidate.")
 
 
+def _store_avg_rows(store_data, name_key):
+    """Per-EHR weighted-avg star rating from a store's app metadata."""
+    rows = {}
+    if not store_data:
+        return rows
+    for ehr in store_data.get("ehr_order", []):
+        apps = store_data.get("apps", {}).get(ehr, [])
+        # Apple uses rating_count; Play search gives only avg per app (weight 1).
+        weights = [(a.get("rating_count") or 1) for a in apps]
+        ratings = [a.get("avg_rating") for a in apps if a.get("avg_rating")]
+        if not ratings:
+            rows[ehr] = None
+            continue
+        tot_w = sum(w for a, w in zip(apps, weights) if a.get("avg_rating"))
+        wavg = sum((a.get("avg_rating") or 0) * w
+                   for a, w in zip(apps, weights) if a.get("avg_rating")) / tot_w
+        rows[ehr] = round(wavg, 2)
+    return rows
+
+
 def view_appstore(data):
-    st.header("App Store Reviews — official star ratings (free)")
-    reviews = load_reviews()
-    if reviews is None:
+    st.header("App Reviews — official star ratings (free)")
+    apple = load_reviews()
+    play = load_playstore()
+    if apple is None and play is None:
         st.info(
-            "App Store review data not found.\n\n"
-            "Run `python reviews.py` (free, no key) then `python analyze.py`, "
+            "No app-review data found.\n\n"
+            "Run `python reviews.py` (Apple) and/or `python playstore.py` "
+            "(Google Play) — both free, no key — then `python analyze.py`, "
             "then reload.")
         return
 
     st.caption(
-        "Real customer reviews + 1-5★ ratings from Apple's App Store "
+        "Real customer reviews + 1-5★ from Apple App Store and Google Play "
         "(free, official). Star ratings are ground-truth to sanity-check the "
         "automated VADER sentiment.")
 
-    # Official weighted avg rating per EHR (weight each app by its rating count).
+    apple_avg = _store_avg_rows(apple, "name")
+    play_avg = _store_avg_rows(play, "title")
+    order = (apple or play).get("ehr_order", [])
     rows = []
-    for ehr in reviews.get("ehr_order", []):
-        apps = reviews.get("apps", {}).get(ehr, [])
-        tot_w = sum((a.get("rating_count") or 0) for a in apps)
-        if tot_w:
-            wavg = sum((a.get("avg_rating") or 0) * (a.get("rating_count") or 0)
-                       for a in apps) / tot_w
-        else:
-            wavg = None
+    for ehr in order:
         rows.append({
             "EHR": ehr,
-            "official avg ★": round(wavg, 2) if wavg is not None else None,
-            "total ratings": tot_w,
-            "apps": ", ".join(a["name"] for a in apps) or "—",
+            "Apple ★": apple_avg.get(ehr),
+            "Google Play ★": play_avg.get(ehr),
         })
     df = pd.DataFrame(rows)
+    st.subheader("Official average star rating by store")
     st.dataframe(df, hide_index=True, use_container_width=True)
 
-    rated = df[df["official avg ★"].notna()]
-    if not rated.empty:
-        st.subheader("Official average star rating")
-        d = rated.sort_values("official avg ★", ascending=True)
-        colors = ["#d62728" if v < 3 else ("#ff7f0e" if v < 4 else "#2ca02c")
-                  for v in d["official avg ★"]]
-        fig = go.Figure(go.Bar(
-            x=d["official avg ★"], y=d["EHR"], orientation="h",
-            marker_color=colors, text=[f"{v}★" for v in d["official avg ★"]],
-            textposition="auto"))
-        fig.update_layout(height=360, xaxis_range=[0, 5],
-                          margin=dict(l=10, r=10, t=10, b=10))
+    # Grouped bar comparing the two stores.
+    melt = df.melt(id_vars="EHR", value_vars=["Apple ★", "Google Play ★"],
+                   var_name="store", value_name="rating").dropna()
+    if not melt.empty:
+        fig = px.bar(melt, x="rating", y="EHR", color="store",
+                     orientation="h", barmode="group", range_x=[0, 5],
+                     color_discrete_map={"Apple ★": "#1f77b4",
+                                         "Google Play ★": "#2ca02c"})
+        fig.update_layout(height=420, margin=dict(l=10, r=10, t=10, b=10))
         st.plotly_chart(fig, use_container_width=True)
 
-    # Sample review quotes (from analyzed mentions tagged source=appstore).
-    st.subheader("Sample reviews")
-    appstore_ms = {}
+    # Collect store-review mentions per vendor (Apple + Play).
+    store_label = {"appstore": "Apple", "googleplay": "Google Play"}
+    review_ms = {}
     for ehr in data["ehr_order"]:
         ms = [m for m in data["ehrs"].get(ehr, {}).get("mentions", [])
-              if m.get("source") == "appstore"]
+              if m.get("source") in store_label]
         if ms:
-            appstore_ms[ehr] = ms
-    if not appstore_ms:
-        st.info("No App Store reviews in the analysis yet — run analyze.py "
-                "after reviews.py.")
+            review_ms[ehr] = ms
+    if not review_ms:
+        st.info("No store reviews in the analysis yet — run analyze.py after "
+                "reviews.py / playstore.py.")
         return
-    pick = st.selectbox("Vendor", list(appstore_ms.keys()))
-    ms = sorted(appstore_ms[pick], key=lambda m: m.get("star_rating") or 0)
+
+    # Top complaints from app reviews (Apple + Play only).
+    st.subheader("Top complaints (from app reviews)")
+    overall = Counter()
+    per_vendor = {}
+    for ehr, ms in review_ms.items():
+        c = Counter()
+        for m in ms:
+            for theme in m.get("complaints", []):
+                c[theme] += 1
+                overall[theme] += 1
+        per_vendor[ehr] = c
+    if overall:
+        comp_df = pd.DataFrame(overall.most_common(10),
+                               columns=["complaint theme", "mentions"])
+        d = comp_df.sort_values("mentions", ascending=True)
+        fig = go.Figure(go.Bar(
+            x=d["mentions"], y=d["complaint theme"], orientation="h",
+            marker_color="#d62728", text=d["mentions"], textposition="auto"))
+        fig.update_layout(height=360, margin=dict(l=10, r=10, t=10, b=10),
+                          xaxis_title="app-review mentions")
+        st.plotly_chart(fig, use_container_width=True)
+    else:
+        st.write("No complaint themes detected in app reviews.")
+
+    # Sample review quotes from analyzed mentions (Apple + Play).
+    st.subheader("Sample reviews")
+    pick = st.selectbox("Vendor", list(review_ms.keys()))
+    pv = per_vendor.get(pick, Counter())
+    if pv:
+        st.caption("**" + pick + "** top app-review complaints: " +
+                   ", ".join(f"{t} ({n})" for t, n in pv.most_common(5)))
+    src_filter = st.multiselect("Store", ["Apple", "Google Play"],
+                                default=["Apple", "Google Play"])
+    ms = [m for m in review_ms[pick]
+          if store_label.get(m.get("source")) in src_filter]
+    ms.sort(key=lambda m: m.get("star_rating") or 0)
     qrows = []
     for m in ms:
         text = m["text"].replace("\n", " ").strip()
         if len(text) > 300:
             text = text[:300] + "…"
         qrows.append({
+            "store": store_label.get(m.get("source"), ""),
             "stars": (m.get("star_rating") or 0),
             "VADER": m["sentiment"],
             "quote": text,
@@ -327,7 +408,8 @@ def view_appstore(data):
             "link": st.column_config.LinkColumn("app", display_text="open"),
             "quote": st.column_config.TextColumn("quote", width="large"),
         })
-    st.caption(f"App Store data fetched: {reviews.get('fetched_at', 'n/a')}")
+    fetched = (apple or {}).get("fetched_at") or (play or {}).get("fetched_at")
+    st.caption(f"App-review data fetched: {fetched or 'n/a'}")
 
 
 def view_market_presence(data):
@@ -461,6 +543,31 @@ def view_per_system(data):
     if total < LOW_VOLUME_THRESHOLD:
         st.caption(f"⚠️ Only {total} mentions — interpret cautiously.")
 
+    # Data volume + where it came from.
+    st.subheader("Data volume & sources")
+    src_counts = Counter()
+    for m in rec.get("mentions", []):
+        s = (m.get("source") or "reddit")
+        if s == "appstore":
+            src_counts["App Store"] += 1
+        elif s == "googleplay":
+            src_counts["Google Play"] += 1
+        elif s.startswith("manual"):
+            src_counts["Manual (G2/Capterra)"] += 1
+        else:
+            src_counts["Reddit"] += 1
+
+    cols = st.columns(len(src_counts) + 1)
+    cols[0].metric(f"{ehr} total", total)
+    for col, (label, n) in zip(cols[1:], sorted(src_counts.items())):
+        pct = round(100.0 * n / total, 1) if total else 0
+        col.metric(label, n, f"{pct}%")
+
+    st.caption(
+        f"Grand total across all vendors: "
+        f"{sum(r.get('total', 0) for r in data['ehrs'].values())} data points "
+        f"(Reddit + App Store + Google Play + any manual imports).")
+
     c1, c2 = st.columns([1, 1])
 
     # Sentiment breakdown pie.
@@ -498,7 +605,8 @@ def view_per_system(data):
 
     # Sample quotes with clickable links (anonymized — no usernames).
     st.subheader("Sample quotes")
-    st.caption("Public Reddit content, usernames omitted. Click to open thread.")
+    st.caption("App Store reviews first, then Google Play, then Reddit. "
+               "Public content, usernames omitted. Click to open.")
 
     mentions = rec.get("mentions", [])
     sent_filter = st.multiselect(
@@ -506,8 +614,10 @@ def view_per_system(data):
         ["positive", "neutral", "negative"],
         default=["positive", "neutral", "negative"])
     filtered = [m for m in mentions if m["sentiment"] in sent_filter]
-    # Show most-upvoted first.
-    filtered.sort(key=lambda m: m.get("score", 0), reverse=True)
+    # Order: App Store -> Google Play -> manual -> Reddit; within each, by
+    # engagement (score) descending.
+    filtered.sort(key=lambda m: (source_rank(m.get("source")),
+                                 -(m.get("score", 0) or 0)))
 
     if not filtered:
         st.write("No quotes match the filter.")
@@ -518,9 +628,10 @@ def view_per_system(data):
             if len(text) > 280:
                 text = text[:280] + "…"
             quote_rows.append({
+                "source": source_label(m),
                 "sentiment": m["sentiment"],
+                "stars": m.get("star_rating") if m.get("star_rating") else "",
                 "score": m.get("score", 0),
-                "subreddit": "r/" + m.get("subreddit", ""),
                 "quote": text,
                 "link": m.get("permalink", ""),
             })
@@ -531,7 +642,7 @@ def view_per_system(data):
             use_container_width=True,
             height=420,
             column_config={
-                "link": st.column_config.LinkColumn("thread", display_text="open"),
+                "link": st.column_config.LinkColumn("link", display_text="open"),
                 "quote": st.column_config.TextColumn("quote", width="large"),
             },
         )
@@ -606,8 +717,8 @@ def main():
 
     view = st.sidebar.radio(
         "View",
-        ["Overview", "Churn Signals", "Complaint Heatmap",
-         "Per-System", "Comparison", "App Store", "Market Presence",
+        ["Per-System", "App Store", "Overview", "Churn Signals",
+         "Complaint Heatmap", "Comparison", "Market Presence",
          "Gap Analysis"])
 
     st.sidebar.markdown("---")
