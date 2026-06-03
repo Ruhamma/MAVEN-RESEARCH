@@ -1,0 +1,3489 @@
+{
+  "fetched_at": "2026-06-03T10:34:30.743731+00:00",
+  "ehr_order": [
+    "AthenaHealth",
+    "NextGen",
+    "eClinicalWorks",
+    "Tebra",
+    "DrChrono",
+    "ModMed",
+    "Practice Fusion",
+    "CharmHealth"
+  ],
+  "ehrs": {
+    "AthenaHealth": {
+      "total_products": 180,
+      "active_products": 6,
+      "declined_products": 174,
+      "latest_cert_date": "2026-04-09",
+      "products": [
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-06-21"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-06-21"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-06-21"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-02-26"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-05-21"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-06-21"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-02-27"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-04-07"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-12-12"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-11-10"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-01-19"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-06-03"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-01-11"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-04-11"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-03-14"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-01-25"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-06-11"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-09-25"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-11-20"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-02-13"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-05-11"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-05-13"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-07-21"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-08-31"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-10-24"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-10-24"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-11-23"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-11-23"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-12-19"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2017-03-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2017-11-27"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2018-06-02"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2018-06-01"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2018-09-09"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2018-09-09"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2018-09-10"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2018-11-21"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2018-12-07"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-12-27"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2023-03-17"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2024-04-19"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2025-03-21"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "",
+          "status": "Active",
+          "cert_date": "2026-04-09"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-06-21"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-06-21"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-05-21"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-05-21"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-06-21"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-06-21"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-06-21"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-06-21"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-10-08"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-03-10"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-07-17"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-01-11"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-05-11"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-03-14"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-09-05"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-05-02"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-01-25"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-08-08"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-12-28"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-07-09"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-08-18"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-11-20"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-02-13"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-04-27"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-05-11"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-06-24"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-06-24"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-07-21"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-08-31"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-10-24"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-10-24"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-12-19"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2017-03-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2017-09-12"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2017-09-12"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2017-11-27"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2017-11-30"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2018-06-01"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2018-12-06"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2018-12-07"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-03-18"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-11-18"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2020-03-12"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2022-07-26"
+        },
+        {
+          "product": "athenaClinicals",
+          "developer": "athenahealth, Inc.",
+          "edition": "",
+          "status": "Active",
+          "cert_date": "2025-10-28"
+        },
+        {
+          "product": "athenaClinicals for Hospitals and Health Systems",
+          "developer": "athenahealth, Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-11-18"
+        },
+        {
+          "product": "athenaClinicals for Hospitals and Health Systems",
+          "developer": "athenahealth, Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2023-03-17"
+        },
+        {
+          "product": "athenaClinicals for Hospitals and Health Systems",
+          "developer": "athenahealth, Inc.",
+          "edition": "",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2024-06-03"
+        },
+        {
+          "product": "athenaClinicals for Hospitals and Health Systems",
+          "developer": "athenahealth, Inc.",
+          "edition": "",
+          "status": "Active",
+          "cert_date": "2026-04-09"
+        },
+        {
+          "product": "athenaClinicals for Hospitals and Health Systems",
+          "developer": "athenahealth, Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2018-12-07"
+        },
+        {
+          "product": "athenaClinicals for Hospitals and Health Systems",
+          "developer": "athenahealth, Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-03-18"
+        },
+        {
+          "product": "athenaClinicals for Hospitals and Health Systems",
+          "developer": "athenahealth, Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-12-27"
+        },
+        {
+          "product": "athenaClinicals for Hospitals and Health Systems",
+          "developer": "athenahealth, Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2020-03-12"
+        },
+        {
+          "product": "athenaClinicals for Hospitals and Health Systems",
+          "developer": "athenahealth, Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2022-07-26"
+        },
+        {
+          "product": "athenaClinicals for Hospitals and Health Systems",
+          "developer": "athenahealth, Inc.",
+          "edition": "",
+          "status": "Active",
+          "cert_date": "2025-03-21"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-10-08"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-12-12"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-04-07"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-01-19"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-06-03"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-01-11"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-09-05"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-01-25"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-08-08"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-04-27"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-05-13"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-10-24"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-12-19"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2017-03-30"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2018-12-06"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-02-27"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-11-10"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-03-10"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-07-21"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-05-11"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-08-25"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-08-25"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-08-25"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-03-14"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-09-25"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-07-09"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-11-20"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-11-20"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-02-13"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-06-24"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-07-21"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-08-31"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-10-24"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-11-23"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2017-09-12"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2017-11-27"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2018-06-01"
+        },
+        {
+          "product": "athenaCommunicator",
+          "developer": "athenahealth, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2018-09-09"
+        },
+        {
+          "product": "athenaFlow",
+          "developer": "athenahealth, Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2022-06-21"
+        },
+        {
+          "product": "athenaFlow",
+          "developer": "athenahealth, Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2023-04-03"
+        },
+        {
+          "product": "athenaFlow",
+          "developer": "athenahealth, Inc.",
+          "edition": "",
+          "status": "Active",
+          "cert_date": "2025-07-11"
+        },
+        {
+          "product": "athenaFlow",
+          "developer": "athenahealth, Inc.",
+          "edition": "",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2024-12-22"
+        },
+        {
+          "product": "athenaPractice",
+          "developer": "athenahealth, Inc.",
+          "edition": "",
+          "status": "Active",
+          "cert_date": "2025-04-28"
+        },
+        {
+          "product": "athenaPractice",
+          "developer": "athenahealth, Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2022-06-21"
+        },
+        {
+          "product": "athenaPractice",
+          "developer": "athenahealth, Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2023-04-03"
+        },
+        {
+          "product": "athenaPractice",
+          "developer": "athenahealth, Inc.",
+          "edition": "",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2024-12-22"
+        }
+      ],
+      "has_data": true
+    },
+    "NextGen": {
+      "total_products": 111,
+      "active_products": 6,
+      "declined_products": 105,
+      "latest_cert_date": "2026-01-30",
+      "products": [
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2011-01-14"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2011-01-14"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2011-01-14"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2011-01-14"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2011-01-14"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-09-18"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2011-01-14"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-07-16"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-05-28"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-12-10"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-12-10"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-01-17"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-05-13"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-09-29"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-12-09"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2017-03-07"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-02-26"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-07-31"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-09-03"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2020-01-05"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2020-03-23"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-09-18"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-09-18"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2011-01-14"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2011-01-14"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2011-01-14"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2011-01-14"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2011-01-14"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2011-01-14"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2011-01-14"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2011-01-14"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-04-08"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-10-02"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-01-23"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-05-13"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2017-03-13"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2017-11-20"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2018-04-23"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2021-06-04"
+        },
+        {
+          "product": "Medfusion Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2022-03-10"
+        },
+        {
+          "product": "Mirth Connect",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2018-11-01"
+        },
+        {
+          "product": "Mirth Connect",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2018-11-01"
+        },
+        {
+          "product": "Mirth Connect",
+          "developer": "NextGen Healthcare",
+          "edition": "",
+          "status": "Active",
+          "cert_date": "2025-03-21"
+        },
+        {
+          "product": "Mirth Connect",
+          "developer": "NextGen Healthcare",
+          "edition": "",
+          "status": "Active",
+          "cert_date": "2026-01-30"
+        },
+        {
+          "product": "Mirth Connect",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2018-11-01"
+        },
+        {
+          "product": "Mirth Connect",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2018-11-01"
+        },
+        {
+          "product": "Mirth Connect",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2018-11-01"
+        },
+        {
+          "product": "Mirth Connect",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2018-11-01"
+        },
+        {
+          "product": "Mirth Connect",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2018-11-01"
+        },
+        {
+          "product": "Mirth Connect",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2018-11-01"
+        },
+        {
+          "product": "Mirth Connect",
+          "developer": "NextGen Healthcare",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2022-12-29"
+        },
+        {
+          "product": "Mirth Connect",
+          "developer": "NextGen Healthcare",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2023-12-13"
+        },
+        {
+          "product": "Mirth Connect",
+          "developer": "NextGen Healthcare",
+          "edition": "2015",
+          "status": "Active",
+          "cert_date": "2024-02-22"
+        },
+        {
+          "product": "Mirth Mail",
+          "developer": "NextGen Healthcare",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2017-12-27"
+        },
+        {
+          "product": "NG EDS",
+          "developer": "NextGen Healthcare",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2013-09-25"
+        },
+        {
+          "product": "NextGen Ambulatory EHR",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-02-20"
+        },
+        {
+          "product": "NextGen Ambulatory EHR",
+          "developer": "NextGen Healthcare",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "NextGen Ambulatory EHR",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-12-22"
+        },
+        {
+          "product": "NextGen Ambulatory EHR",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-03-01"
+        },
+        {
+          "product": "NextGen Ambulatory EHR",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-04-28"
+        },
+        {
+          "product": "NextGen Ambulatory EHR",
+          "developer": "NextGen Healthcare",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "NextGen Ambulatory EHR",
+          "developer": "NextGen Healthcare",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-09-30"
+        },
+        {
+          "product": "NextGen Ambulatory EHR",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-02-19"
+        },
+        {
+          "product": "NextGen Ambulatory EHR",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-10-14"
+        },
+        {
+          "product": "NextGen Ambulatory EHR",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2018-11-01"
+        },
+        {
+          "product": "NextGen Ambulatory EHR",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2018-11-01"
+        },
+        {
+          "product": "NextGen Ambulatory EHR",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2018-11-01"
+        },
+        {
+          "product": "NextGen Ambulatory EHR",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-05-05"
+        },
+        {
+          "product": "NextGen Ambulatory EHR",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-02-27"
+        },
+        {
+          "product": "NextGen Ambulatory EHR",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-03-01"
+        },
+        {
+          "product": "NextGen Ambulatory EHR",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-06-03"
+        },
+        {
+          "product": "NextGen Ambulatory EHR",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-08-04"
+        },
+        {
+          "product": "NextGen Ambulatory EHR",
+          "developer": "NextGen Healthcare",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2017-06-02"
+        },
+        {
+          "product": "NextGen Ambulatory EHR",
+          "developer": "NextGen Healthcare",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2017-09-21"
+        },
+        {
+          "product": "NextGen Ambulatory EHR",
+          "developer": "NextGen Healthcare",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2017-10-25"
+        },
+        {
+          "product": "NextGen Ambulatory EHR",
+          "developer": "NextGen Healthcare",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2017-11-27"
+        },
+        {
+          "product": "NextGen Ambulatory EHR",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2018-11-01"
+        },
+        {
+          "product": "NextGen Direct Messaging",
+          "developer": "NextGen Healthcare",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2020-12-18"
+        },
+        {
+          "product": "NextGen Direct Messaging",
+          "developer": "NextGen Healthcare",
+          "edition": "2015",
+          "status": "Active",
+          "cert_date": "2021-08-12"
+        },
+        {
+          "product": "NextGen Direct Messaging",
+          "developer": "NextGen Healthcare",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-03-26"
+        },
+        {
+          "product": "NextGen Direct Messaging",
+          "developer": "NextGen Healthcare",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-12-05"
+        },
+        {
+          "product": "NextGen EDR",
+          "developer": "NextGen Healthcare",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2012-05-09"
+        },
+        {
+          "product": "NextGen EDR",
+          "developer": "NextGen Healthcare",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2012-05-09"
+        },
+        {
+          "product": "NextGen EDR",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2018-11-01"
+        },
+        {
+          "product": "NextGen EDR",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2018-11-01"
+        },
+        {
+          "product": "NextGen EDR",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-10-16"
+        },
+        {
+          "product": "NextGen EDR",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-05-03"
+        },
+        {
+          "product": "NextGen Enterprise EHR",
+          "developer": "NextGen Healthcare",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2018-05-08"
+        },
+        {
+          "product": "NextGen Enterprise EHR",
+          "developer": "NextGen Healthcare",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2022-03-03"
+        },
+        {
+          "product": "NextGen Enterprise EHR",
+          "developer": "NextGen Healthcare",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2023-06-20"
+        },
+        {
+          "product": "NextGen Enterprise EHR",
+          "developer": "NextGen Healthcare",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2018-10-24"
+        },
+        {
+          "product": "NextGen Enterprise EHR",
+          "developer": "NextGen Healthcare",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-02-21"
+        },
+        {
+          "product": "NextGen Enterprise EHR",
+          "developer": "NextGen Healthcare",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2020-02-03"
+        },
+        {
+          "product": "NextGen Enterprise EHR",
+          "developer": "NextGen Healthcare",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2021-03-05"
+        },
+        {
+          "product": "NextGen Enterprise EHR",
+          "developer": "NextGen Healthcare",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2022-03-18"
+        },
+        {
+          "product": "NextGen Enterprise EHR",
+          "developer": "NextGen Healthcare",
+          "edition": "",
+          "status": "Active",
+          "cert_date": "2025-06-02"
+        },
+        {
+          "product": "NextGen Inpatient Clinicals",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-08-07"
+        },
+        {
+          "product": "NextGen Inpatient Clinicals",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-05-01"
+        },
+        {
+          "product": "NextGen Inpatient Clinicals",
+          "developer": "NextGen Healthcare",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-12-01"
+        },
+        {
+          "product": "NextGen Inpatient Clinicals",
+          "developer": "NextGen Healthcare",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-12-01"
+        },
+        {
+          "product": "NextGen Inpatient Clinicals",
+          "developer": "NextGen Healthcare",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-12-01"
+        },
+        {
+          "product": "NextGen Inpatient Clinicals",
+          "developer": "NextGen Healthcare",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-12-01"
+        },
+        {
+          "product": "NextGen Inpatient Clinicals",
+          "developer": "NextGen Healthcare",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-12-01"
+        },
+        {
+          "product": "NextGen Inpatient Clinicals",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-09-18"
+        },
+        {
+          "product": "NextGen Office",
+          "developer": "NextGen Healthcare",
+          "edition": "2015",
+          "status": "Active",
+          "cert_date": "2018-02-20"
+        },
+        {
+          "product": "NextGen Patient Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-08-07"
+        },
+        {
+          "product": "NextGen Population Health Solution",
+          "developer": "NextGen Healthcare",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2018-10-18"
+        },
+        {
+          "product": "NextGen Population Health Solution",
+          "developer": "NextGen Healthcare",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2021-04-05"
+        },
+        {
+          "product": "NextGen PxP Portal",
+          "developer": "NextGen Healthcare",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2023-02-15"
+        },
+        {
+          "product": "QSIDental CPS",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-12-13"
+        },
+        {
+          "product": "QSIDental Web",
+          "developer": "NextGen Healthcare",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-10-30"
+        }
+      ],
+      "has_data": true
+    },
+    "eClinicalWorks": {
+      "total_products": 31,
+      "active_products": 2,
+      "declined_products": 29,
+      "latest_cert_date": "2024-03-22",
+      "products": [
+        {
+          "product": "Enterprise Patient Portal",
+          "developer": "eClinicalWorks, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-01-23"
+        },
+        {
+          "product": "Enterprise Patient Portal",
+          "developer": "eClinicalWorks, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-01-23"
+        },
+        {
+          "product": "Enterprise Patient Portal",
+          "developer": "eClinicalWorks, LLC",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2019-03-05"
+        },
+        {
+          "product": "Enterprise Patient Portal",
+          "developer": "eClinicalWorks, LLC",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2019-03-05"
+        },
+        {
+          "product": "Healow Enterprise Patient Portal",
+          "developer": "eClinicalWorks, LLC",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-12-22"
+        },
+        {
+          "product": "Healow Enterprise Patient Portal",
+          "developer": "eClinicalWorks, LLC",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-07-31"
+        },
+        {
+          "product": "Healow Enterprise Patient Portal",
+          "developer": "eClinicalWorks, LLC",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-10-30"
+        },
+        {
+          "product": "Healow Enterprise Patient Portal",
+          "developer": "eClinicalWorks, LLC",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-07-31"
+        },
+        {
+          "product": "eClinicalWorks",
+          "developer": "eClinicalWorks, LLC",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-07-24"
+        },
+        {
+          "product": "eClinicalWorks",
+          "developer": "eClinicalWorks, LLC",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-03-14"
+        },
+        {
+          "product": "eClinicalWorks",
+          "developer": "eClinicalWorks, LLC",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-10-01"
+        },
+        {
+          "product": "eClinicalWorks",
+          "developer": "eClinicalWorks, LLC",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-10-01"
+        },
+        {
+          "product": "eClinicalWorks",
+          "developer": "eClinicalWorks, LLC",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-07-31"
+        },
+        {
+          "product": "eClinicalWorks",
+          "developer": "eClinicalWorks, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2017-12-28"
+        },
+        {
+          "product": "eClinicalWorks",
+          "developer": "eClinicalWorks, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2022-02-01"
+        },
+        {
+          "product": "eClinicalWorks",
+          "developer": "eClinicalWorks, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2022-04-11"
+        },
+        {
+          "product": "eClinicalWorks",
+          "developer": "eClinicalWorks, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2022-11-16"
+        },
+        {
+          "product": "eClinicalWorks",
+          "developer": "eClinicalWorks, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2022-12-12"
+        },
+        {
+          "product": "eClinicalWorks",
+          "developer": "eClinicalWorks, LLC",
+          "edition": "2015",
+          "status": "Active",
+          "cert_date": "2023-06-13"
+        },
+        {
+          "product": "eClinicalWorks",
+          "developer": "eClinicalWorks, LLC",
+          "edition": "",
+          "status": "Active",
+          "cert_date": "2024-03-22"
+        },
+        {
+          "product": "eClinicalWorks",
+          "developer": "eClinicalWorks, LLC",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-03-14"
+        },
+        {
+          "product": "eClinicalWorks",
+          "developer": "eClinicalWorks, LLC",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-03-13"
+        },
+        {
+          "product": "eClinicalWorks",
+          "developer": "eClinicalWorks, LLC",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-10-01"
+        },
+        {
+          "product": "eClinicalWorks",
+          "developer": "eClinicalWorks, LLC",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-10-01"
+        },
+        {
+          "product": "eClinicalWorks",
+          "developer": "eClinicalWorks, LLC",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-07-31"
+        },
+        {
+          "product": "eClinicalWorks",
+          "developer": "eClinicalWorks, LLC",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-07-31"
+        },
+        {
+          "product": "eClinicalWorks",
+          "developer": "eClinicalWorks, LLC",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2017-05-26"
+        },
+        {
+          "product": "eClinicalWorks",
+          "developer": "eClinicalWorks, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2021-12-28"
+        },
+        {
+          "product": "eClinicalWorks",
+          "developer": "eClinicalWorks, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2022-02-01"
+        },
+        {
+          "product": "eClinicalWorks",
+          "developer": "eClinicalWorks, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2022-02-01"
+        },
+        {
+          "product": "eClinicalWorks",
+          "developer": "eClinicalWorks, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2022-09-29"
+        }
+      ],
+      "has_data": true
+    },
+    "Tebra": {
+      "total_products": 6,
+      "active_products": 1,
+      "declined_products": 5,
+      "latest_cert_date": "2024-12-19",
+      "products": [
+        {
+          "product": "Kareo EHR",
+          "developer": "Tebra Technologies, Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2013-02-28"
+        },
+        {
+          "product": "Kareo EHR",
+          "developer": "Tebra Technologies, Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-03-14"
+        },
+        {
+          "product": "Kareo EHR",
+          "developer": "Tebra Technologies, Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2017-12-31"
+        },
+        {
+          "product": "Kareo EHR",
+          "developer": "Tebra Technologies, Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2021-01-01"
+        },
+        {
+          "product": "Tebra EHR",
+          "developer": "Tebra Technologies, Inc.",
+          "edition": "",
+          "status": "Active",
+          "cert_date": "2024-12-19"
+        },
+        {
+          "product": "Tebra EHR (Kareo)",
+          "developer": "Tebra Technologies, Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2022-12-19"
+        }
+      ],
+      "has_data": true
+    },
+    "DrChrono": {
+      "total_products": 6,
+      "active_products": 1,
+      "declined_products": 5,
+      "latest_cert_date": "2022-05-31",
+      "products": [
+        {
+          "product": "drchrono EHR",
+          "developer": "drchrono Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2018-12-27"
+        },
+        {
+          "product": "drchrono EHR",
+          "developer": "drchrono Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by ONC-ACB",
+          "cert_date": "2020-06-18"
+        },
+        {
+          "product": "drchrono EHR",
+          "developer": "drchrono Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2011-06-24"
+        },
+        {
+          "product": "drchrono EHR",
+          "developer": "drchrono Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-07-14"
+        },
+        {
+          "product": "drchrono EHR",
+          "developer": "drchrono Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2021-11-19"
+        },
+        {
+          "product": "drchrono EHR",
+          "developer": "drchrono Inc.",
+          "edition": "2015",
+          "status": "Active",
+          "cert_date": "2022-05-31"
+        }
+      ],
+      "has_data": true
+    },
+    "ModMed": {
+      "total_products": 134,
+      "active_products": 3,
+      "declined_products": 131,
+      "latest_cert_date": "2025-09-02",
+      "products": [
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-12-22"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-04-08"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-06-26"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-09-14"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-12-28"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-09-16"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-11-09"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2017-03-22"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-08-24"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-12-31"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2020-08-11"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2020-08-11"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2021-01-19"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2021-05-10"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2021-05-10"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2022-03-28"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2012-02-10"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-10-09"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2011-08-23"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2012-01-26"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2012-02-10"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-04-08"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-04-16"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-04-16"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-04-18"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-10-20"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-08-15"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-08-15"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-12-28"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-02-13"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-06-27"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-06-27"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2017-08-31"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2017-08-31"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2017-08-31"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2017-12-21"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2018-02-28"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2018-08-17"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2018-11-08"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2018-12-28"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2018-12-28"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-04-03"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-05-15"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-11-15"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2020-08-25"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2021-02-16"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2021-09-27"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2021-12-09"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2022-03-28"
+        },
+        {
+          "product": "EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Active",
+          "cert_date": "2022-11-29"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-12-28"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-02-13"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-11-09"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2017-08-31"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2017-08-31"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2018-12-28"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-04-03"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-05-15"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-08-24"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-12-09"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2020-08-11"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2020-08-11"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2020-08-25"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2021-01-19"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-01-17"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-04-08"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-04-08"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-06-26"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-04-16"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-04-18"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-10-20"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-09-14"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-08-15"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-08-15"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-12-28"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-06-27"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-06-27"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2016-09-16"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2017-03-22"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2017-08-31"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2017-12-21"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2018-02-28"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2018-08-17"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2018-11-08"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2018-12-28"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-11-15"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2021-02-16"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2021-05-10"
+        },
+        {
+          "product": "EMA Mobile",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2021-05-10"
+        },
+        {
+          "product": "Eyefinity EHR Mobile Powered by EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-12-31"
+        },
+        {
+          "product": "Eyefinity EHR Powered by EMA",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-12-31"
+        },
+        {
+          "product": "ModMed ASC",
+          "developer": "Modernizing Medicine Inc.",
+          "edition": "",
+          "status": "Active",
+          "cert_date": "2025-09-02"
+        },
+        {
+          "product": "TRAKNet",
+          "developer": "Modernizing Medicine Podiatry Systems, Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2017-12-29"
+        },
+        {
+          "product": "TRAKNet",
+          "developer": "Modernizing Medicine Podiatry Systems, Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-06-22"
+        },
+        {
+          "product": "TRAKNet",
+          "developer": "Modernizing Medicine Podiatry Systems, Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-12-31"
+        },
+        {
+          "product": "TRAKnet",
+          "developer": "Modernizing Medicine Podiatry Systems, Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2022-07-28"
+        },
+        {
+          "product": "TRAKnet",
+          "developer": "Modernizing Medicine Podiatry Systems, Inc.",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2022-12-29"
+        },
+        {
+          "product": "gCardio",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2018-12-05"
+        },
+        {
+          "product": "gCardio",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-05-15"
+        },
+        {
+          "product": "gCardio",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2020-03-05"
+        },
+        {
+          "product": "gCardio",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2020-12-08"
+        },
+        {
+          "product": "gCardio",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-08-24"
+        },
+        {
+          "product": "gCardio",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-10-21"
+        },
+        {
+          "product": "gCardio",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2020-05-20"
+        },
+        {
+          "product": "gGastro",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2018-12-05"
+        },
+        {
+          "product": "gGastro",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-05-15"
+        },
+        {
+          "product": "gGastro",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-08-24"
+        },
+        {
+          "product": "gGastro",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2020-03-05"
+        },
+        {
+          "product": "gGastro",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2020-12-08"
+        },
+        {
+          "product": "gGastro",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2021-09-27"
+        },
+        {
+          "product": "gGastro",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Active",
+          "cert_date": "2022-12-07"
+        },
+        {
+          "product": "gGastro",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-10-21"
+        },
+        {
+          "product": "gGastro",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2020-05-20"
+        },
+        {
+          "product": "gGastro Cloud",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-10-21"
+        },
+        {
+          "product": "gGastro Cloud",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2020-03-05"
+        },
+        {
+          "product": "gGastro Cloud",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2020-05-20"
+        },
+        {
+          "product": "gGastro Cloud",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2018-12-05"
+        },
+        {
+          "product": "gGastro Cloud",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-05-15"
+        },
+        {
+          "product": "gGastro Cloud",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-08-24"
+        },
+        {
+          "product": "gGastro Cloud",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2020-12-08"
+        },
+        {
+          "product": "gMed Connect",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2018-12-05"
+        },
+        {
+          "product": "gMed Connect",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-05-15"
+        },
+        {
+          "product": "gMed Connect",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-10-21"
+        },
+        {
+          "product": "gMed Connect",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2020-05-20"
+        },
+        {
+          "product": "gMed Connect",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2020-12-08"
+        },
+        {
+          "product": "gMed Connect",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-08-24"
+        },
+        {
+          "product": "gMed Connect",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2020-03-05"
+        },
+        {
+          "product": "gUro",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2018-12-05"
+        },
+        {
+          "product": "gUro",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-05-15"
+        },
+        {
+          "product": "gUro",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-08-24"
+        },
+        {
+          "product": "gUro",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2020-03-05"
+        },
+        {
+          "product": "gUro",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2019-10-21"
+        },
+        {
+          "product": "gUro",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2020-05-20"
+        },
+        {
+          "product": "gUro",
+          "developer": "Modernizing Medicine Gastroenterology, LLC",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2020-12-08"
+        }
+      ],
+      "has_data": true
+    },
+    "Practice Fusion": {
+      "total_products": 14,
+      "active_products": 1,
+      "declined_products": 13,
+      "latest_cert_date": "2024-08-26",
+      "products": [
+        {
+          "product": "Practice Fusion",
+          "developer": "Practice Fusion",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2011-06-02"
+        },
+        {
+          "product": "Practice Fusion",
+          "developer": "Practice Fusion",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2010-10-18"
+        },
+        {
+          "product": "Practice Fusion",
+          "developer": "Practice Fusion",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2013-02-08"
+        },
+        {
+          "product": "Practice Fusion EHR",
+          "developer": "Practice Fusion",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-12-03"
+        },
+        {
+          "product": "Practice Fusion EHR",
+          "developer": "Practice Fusion",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-01-30"
+        },
+        {
+          "product": "Practice Fusion EHR",
+          "developer": "Practice Fusion",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-07-02"
+        },
+        {
+          "product": "Practice Fusion EHR",
+          "developer": "Practice Fusion",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-09-11"
+        },
+        {
+          "product": "Practice Fusion EHR",
+          "developer": "Practice Fusion",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2015-03-30"
+        },
+        {
+          "product": "Practice Fusion EHR",
+          "developer": "Practice Fusion",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2013-12-19"
+        },
+        {
+          "product": "Practice Fusion EHR",
+          "developer": "Practice Fusion",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-04-07"
+        },
+        {
+          "product": "Practice Fusion EHR",
+          "developer": "Practice Fusion",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2017-07-27"
+        },
+        {
+          "product": "Practice Fusion EHR",
+          "developer": "Practice Fusion",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2017-08-14"
+        },
+        {
+          "product": "Practice Fusion EHR",
+          "developer": "Practice Fusion",
+          "edition": "2015",
+          "status": "Withdrawn by Developer",
+          "cert_date": "2018-12-31"
+        },
+        {
+          "product": "Practice Fusion EHR",
+          "developer": "Practice Fusion",
+          "edition": "",
+          "status": "Active",
+          "cert_date": "2024-08-26"
+        }
+      ],
+      "has_data": true
+    },
+    "CharmHealth": {
+      "total_products": 4,
+      "active_products": 1,
+      "declined_products": 3,
+      "latest_cert_date": "2018-11-15",
+      "products": [
+        {
+          "product": "CharmHealth EHR",
+          "developer": "MedicalMine Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2012-09-13"
+        },
+        {
+          "product": "CharmHealth EHR",
+          "developer": "MedicalMine Inc.",
+          "edition": "2011",
+          "status": "Retired",
+          "cert_date": "2012-12-13"
+        },
+        {
+          "product": "CharmHealth EHR",
+          "developer": "MedicalMine Inc.",
+          "edition": "2014",
+          "status": "Retired",
+          "cert_date": "2014-06-17"
+        },
+        {
+          "product": "CharmHealth EHR",
+          "developer": "MedicalMine Inc.",
+          "edition": "2015",
+          "status": "Active",
+          "cert_date": "2018-11-15"
+        }
+      ],
+      "has_data": true
+    }
+  }
+}
