@@ -1,0 +1,6 @@
+venv/
+data/
+__pycache__/
+*.pyc
+.DS_Store
+chpl_api_key.txt
