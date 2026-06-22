@@ -329,3 +329,68 @@ def fetch_all():
                 done.add((ehr, term))
                 save_partial(done, all_mentions)
                 print(f"    +{term_count} new (saved progress)", flush=True)
+
+    return all_mentions
+
+
+# --------------------------------------------------------------------------- #
+# Main
+# --------------------------------------------------------------------------- #
+
+def main():
+    if os.path.exists(RAW_DATA_PATH):
+        print(f"Cache found at {RAW_DATA_PATH}.")
+        print("Delete it to force a fresh pull. Loading cached summary...")
+        with open(RAW_DATA_PATH, "r", encoding="utf-8") as fh:
+            cached = json.load(fh)
+        print_summary(cached.get("mentions", []), cached.get("fetched_at"))
+        return
+
+    print("No cache. Pulling from PullPush API...")
+    print(f"Fetching newest-first, then filtering to last {DAYS_BACK} days "
+          f"(anchored on {'latest data' if ANCHOR_TO_LATEST_DATA else 'now'}).")
+
+    raw_mentions = fetch_all()
+    mentions, anchor, cutoff = filter_to_window(raw_mentions)
+
+    print(f"\nWindow kept: "
+          f"{datetime.fromtimestamp(cutoff, timezone.utc):%Y-%m-%d} to "
+          f"{datetime.fromtimestamp(anchor, timezone.utc):%Y-%m-%d}")
+    print(f"  {len(raw_mentions)} fetched -> {len(mentions)} within window")
+
+    out = {
+        "fetched_at": datetime.now(timezone.utc).isoformat(),
+        "window_after": cutoff,
+        "window_before": anchor,
+        "mentions": mentions,
+    }
+    os.makedirs("data", exist_ok=True)
+    with open(RAW_DATA_PATH, "w", encoding="utf-8") as fh:
+        json.dump(out, fh, ensure_ascii=False, indent=2)
+
+    # Full run finished — drop the resumable partial file.
+    if os.path.exists(PARTIAL_PATH):
+        os.remove(PARTIAL_PATH)
+
+    print(f"\nSaved {len(mentions)} mentions to {RAW_DATA_PATH}")
+    print_summary(mentions, out["fetched_at"])
+
+
+def print_summary(mentions, fetched_at):
+    counts = {}
+    for m in mentions:
+        counts[m["ehr"]] = counts.get(m["ehr"], 0) + 1
+    for category, term_map in ENTITY_GROUPS:
+        print("\n" + "=" * 40)
+        print(f"SUMMARY — mentions per entity [{category}]")
+        print("=" * 40)
+        for ehr in term_map:
+            print(f"  {ehr:<20} {counts.get(ehr, 0)}")
+    print("-" * 40)
+    print(f"  {'TOTAL':<20} {len(mentions)}")
+    if fetched_at:
+        print(f"\nFetched at: {fetched_at}")
+
+
+if __name__ == "__main__":
+    main()
