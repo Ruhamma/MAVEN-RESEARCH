@@ -196,3 +196,70 @@ def run_query(url, term, normalizer, ehr, subreddit=None):
         "q": term,
         "size": PAGE_SIZE,
     }
+    if subreddit:
+        params["subreddit"] = subreddit
+
+    time.sleep(REQUEST_DELAY)
+    payload = get_with_retry(url, params)
+    if not payload:
+        return []
+
+    items = payload.get("data") or []
+
+    # One-time raw shape dump for debugging.
+    if DEBUG_RAW and not _debug_printed and items:
+        _debug_printed = True
+        sample = items[0]
+        print("\n--- DEBUG: raw first item ---")
+        print(f"    top-level JSON keys: {list(payload.keys())}")
+        print(f"    reading items from payload['data'] ({len(items)} items)")
+        for field in ("body", "title", "selftext", "score", "subreddit",
+                      "permalink", "created_utc"):
+            if field in sample:
+                val = sample[field]
+                if isinstance(val, str) and len(val) > 60:
+                    val = val[:60] + "..."
+                print(f"    {field!r}: {val!r}")
+        print("--- END DEBUG ---\n")
+
+    out = []
+    for item in items:
+        mention = normalizer(item, ehr, term)
+        if mention:
+            out.append(mention)
+    return out
+
+
+def filter_to_window(mentions):
+    """Keep only mentions within DAYS_BACK of the anchor timestamp.
+
+    Anchor is the newest created_utc in the data (ANCHOR_TO_LATEST_DATA=True)
+    or wall-clock now. Returns (kept_mentions, anchor_epoch, cutoff_epoch).
+    """
+    if not mentions:
+        return [], NOW_EPOCH, NOW_EPOCH - WINDOW_SECONDS
+
+    timestamps = [int(m.get("created_utc") or 0) for m in mentions]
+    latest_data = max(timestamps)
+
+    if ANCHOR_TO_LATEST_DATA:
+        anchor = max(latest_data, 0)
+        if latest_data < NOW_EPOCH - WINDOW_SECONDS:
+            print(f"\nNOTE: newest available data "
+                  f"({datetime.fromtimestamp(latest_data, timezone.utc):%Y-%m-%d}) "
+                  f"is older than the wall-clock window. Anchoring the "
+                  f"{DAYS_BACK}-day window on the newest data instead of 'now'.")
+    else:
+        anchor = NOW_EPOCH
+
+    cutoff = anchor - WINDOW_SECONDS
+    kept = [m for m in mentions if int(m.get("created_utc") or 0) >= cutoff]
+    return kept, anchor, cutoff
+
+
+def load_partial():
+    """Load resumable progress: completed (ehr, term) pairs + their mentions."""
+    if not os.path.exists(PARTIAL_PATH):
+        return set(), []
+    try:
+        with open(PARTIAL_PATH, "r", encoding="utf-8") as fh:
