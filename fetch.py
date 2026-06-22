@@ -64,3 +64,69 @@ EHR_TERMS = {
     "eClinicalWorks": ["eClinicalWorks", "eCW"],
     "Tebra": ["Tebra", "Kareo"],
     "DrChrono": ["DrChrono"],
+    "ModMed": ["ModMed", "Modernizing Medicine"],
+    "Practice Fusion": ["Practice Fusion"],
+    "CharmHealth": ["CharmHealth"],
+}
+
+# Telehealth / home-care competitors (from competitor_matrix.xlsx). Each is
+# tracked under the "Telehealth/Home-Care" category so the dashboard can keep
+# the EHR and telehealth segments separate.
+from competitors import (TELEHEALTH_TERMS, CATEGORY_EHR,  # noqa: E402
+                         CATEGORY_TELEHEALTH)
+
+# (entity_name, category) -> search terms, for one combined fetch loop.
+ENTITY_GROUPS = [(CATEGORY_EHR, EHR_TERMS),
+                 (CATEGORY_TELEHEALTH, TELEHEALTH_TERMS)]
+
+# Subreddits to prioritize. We run one filtered query per subreddit PLUS an
+# unfiltered global query for each term to catch mentions outside these subs.
+PRIORITY_SUBREDDITS = [
+    "medicine",
+    "familymedicine",
+    "healthIT",
+    "medicalbilling",
+    "CodingandBilling",
+    "physicianassistant",
+    "nursing",
+    "healthcare",
+    "Residency",
+]
+
+REDDIT_BASE = "https://www.reddit.com"
+
+
+# --------------------------------------------------------------------------- #
+# HTTP helper with retry / backoff
+# --------------------------------------------------------------------------- #
+
+def get_with_retry(url, params):
+    """GET with exponential backoff on 429 / 5xx. Returns parsed JSON or None.
+
+    Quiet by design: transient timeouts/5xx are retried silently. Only a final
+    give-up (after MAX_RETRIES) prints, so a slow PullPush doesn't spam the log
+    with scary-looking 'Read timed out' lines on every attempt.
+    """
+    last_problem = None
+    for attempt in range(MAX_RETRIES):
+        try:
+            resp = requests.get(url, params=params, timeout=TIMEOUT)
+        except requests.RequestException as exc:
+            last_problem = f"network ({type(exc).__name__})"
+            time.sleep(2 ** attempt)
+            continue
+
+        if resp.status_code == 200:
+            try:
+                return resp.json()
+            except ValueError:
+                print("    bad JSON in 200 response; skipping")
+                return None
+
+        if resp.status_code == 429 or 500 <= resp.status_code < 600:
+            last_problem = f"HTTP {resp.status_code}"
+            time.sleep(2 ** attempt)
+            continue
+
+        # Other client error — no point retrying.
+        print(f"    HTTP {resp.status_code}; giving up on this query")
