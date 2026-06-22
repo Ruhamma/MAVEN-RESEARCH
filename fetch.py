@@ -130,3 +130,69 @@ def get_with_retry(url, params):
 
         # Other client error — no point retrying.
         print(f"    HTTP {resp.status_code}; giving up on this query")
+        return None
+
+    print(f"    skipped query after {MAX_RETRIES} tries ({last_problem})")
+    return None
+
+
+# --------------------------------------------------------------------------- #
+# Normalization
+# --------------------------------------------------------------------------- #
+
+def normalize_comment(item, ehr, term):
+    body = (item.get("body") or "").strip()
+    if not body or body in ("[removed]", "[deleted]"):
+        return None
+    permalink = item.get("permalink") or ""
+    return {
+        "ehr": ehr,
+        "matched_term": term,
+        "kind": "comment",
+        "text": body,
+        "score": item.get("score", 0),
+        "subreddit": item.get("subreddit", ""),
+        "permalink": REDDIT_BASE + permalink if permalink else "",
+        "created_utc": item.get("created_utc", 0),
+        "id": item.get("id", ""),
+    }
+
+
+def normalize_submission(item, ehr, term):
+    title = (item.get("title") or "").strip()
+    selftext = (item.get("selftext") or "").strip()
+    if selftext in ("[removed]", "[deleted]"):
+        selftext = ""
+    text = (title + "\n\n" + selftext).strip()
+    if not text:
+        return None
+    permalink = item.get("permalink") or ""
+    return {
+        "ehr": ehr,
+        "matched_term": term,
+        "kind": "submission",
+        "text": text,
+        "score": item.get("score", 0),
+        "subreddit": item.get("subreddit", ""),
+        "permalink": REDDIT_BASE + permalink if permalink else "",
+        "created_utc": item.get("created_utc", 0),
+        "id": item.get("id", ""),
+    }
+
+
+# --------------------------------------------------------------------------- #
+# Query runners
+# --------------------------------------------------------------------------- #
+
+def run_query(url, term, normalizer, ehr, subreddit=None):
+    """Run a single PullPush query, return list of normalized mentions.
+
+    No server-side after/before — PullPush returns newest-first and we filter
+    to the date window client-side (see filter_to_window). This avoids losing
+    everything when the dataset lags behind the machine clock.
+    """
+    global _debug_printed
+    params = {
+        "q": term,
+        "size": PAGE_SIZE,
+    }
