@@ -263,3 +263,69 @@ def load_partial():
         return set(), []
     try:
         with open(PARTIAL_PATH, "r", encoding="utf-8") as fh:
+            p = json.load(fh)
+        done = {tuple(pair) for pair in p.get("completed", [])}
+        return done, p.get("mentions", [])
+    except (ValueError, OSError):
+        return set(), []
+
+
+def save_partial(done, mentions):
+    """Persist progress so a killed run can resume and loses at most one term."""
+    os.makedirs("data", exist_ok=True)
+    tmp = PARTIAL_PATH + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as fh:
+        json.dump({"completed": [list(d) for d in done],
+                   "mentions": mentions}, fh, ensure_ascii=False)
+    os.replace(tmp, PARTIAL_PATH)   # atomic — never leaves a half-written file
+
+
+def fetch_all():
+    """Fetch every EHR across comments + submissions. Resumable per term.
+
+    Saves progress to PARTIAL_PATH after each term so a kill / timeout loses at
+    most one term's work; re-running skips already-completed terms.
+    """
+    done, all_mentions = load_partial()
+    seen_ids = {(m["kind"], m["id"]) for m in all_mentions if m.get("id")}
+    if done:
+        print(f"Resuming: {len(done)} terms already done, "
+              f"{len(all_mentions)} mentions cached.")
+
+    for category, term_map in ENTITY_GROUPS:
+        for ehr, terms in term_map.items():
+            print(f"\n=== {ehr} [{category}] ===", flush=True)
+
+            for term in terms:
+                if (ehr, term) in done:
+                    print(f"  term '{term}' — already done, skipping")
+                    continue
+                print(f"  term '{term}'", flush=True)
+
+                # Query plan: global (no subreddit) for comments + submissions.
+                # Global `q=` already covers the priority subs. Only add per-sub
+                # queries if FETCH_PER_SUBREDDIT is explicitly enabled.
+                query_plan = [(COMMENT_URL, normalize_comment, None),
+                              (SUBMISSION_URL, normalize_submission, None)]
+                if FETCH_PER_SUBREDDIT:
+                    for sub in PRIORITY_SUBREDDITS:
+                        query_plan.append((COMMENT_URL, normalize_comment, sub))
+                        query_plan.append(
+                            (SUBMISSION_URL, normalize_submission, sub))
+
+                term_count = 0
+                for url, normalizer, sub in query_plan:
+                    mentions = run_query(url, term, normalizer, ehr,
+                                         subreddit=sub)
+                    for m in mentions:
+                        dedupe_key = (m["kind"], m["id"])
+                        if m["id"] and dedupe_key in seen_ids:
+                            continue
+                        m["category"] = category
+                        seen_ids.add(dedupe_key)
+                        all_mentions.append(m)
+                        term_count += 1
+
+                done.add((ehr, term))
+                save_partial(done, all_mentions)
+                print(f"    +{term_count} new (saved progress)", flush=True)
