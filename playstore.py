@@ -133,3 +133,70 @@ def to_epoch(dt):
 def normalize(r, ehr, app):
     text = (r.get("content") or "").strip()
     if not text:
+        return None
+    try:
+        rating = int(r.get("score") or 0)
+    except (ValueError, TypeError):
+        rating = 0
+    return {
+        "ehr": ehr,
+        "matched_term": app["title"],
+        "kind": "playstore_review",
+        "source": "googleplay",
+        "text": text,
+        "score": r.get("thumbsUpCount", 0) or 0,
+        "star_rating": rating,
+        "subreddit": f"GooglePlay: {app['title']}",  # reuse 'subreddit' as source
+        "permalink": PLAY_URL.format(app_id=app["app_id"]),
+        "created_utc": to_epoch(r.get("at")),
+        "id": r.get("reviewId", ""),
+    }
+
+
+def main():
+    out = {
+        "fetched_at": datetime.now(timezone.utc).isoformat(),
+        "ehr_order": EHR_ORDER,
+        "apps": {},
+        "reviews": [],
+    }
+    seen = set()
+
+    for ehr, cfg in EHR_APPS.items():
+        print(f"\n=== {ehr} ===")
+        apps = find_apps(cfg)
+        if not apps:
+            print("  no matching apps found")
+            out["apps"][ehr] = []
+            continue
+        out["apps"][ehr] = list(apps.values())
+
+        for app in apps.values():
+            print(f"  app '{app['title']}' ({app.get('avg_rating')}★) "
+                  f"[{app['app_id']}]")
+            time.sleep(REQUEST_DELAY)
+            added = 0
+            for r in pull_reviews(app["app_id"]):
+                m = normalize(r, ehr, app)
+                if not m or (m["id"] and m["id"] in seen):
+                    continue
+                seen.add(m["id"])
+                out["reviews"].append(m)
+                added += 1
+            print(f"    +{added} reviews pulled")
+
+    if not out["reviews"] and os.path.exists(PLAYSTORE_DATA_PATH):
+        print("\nPulled 0 reviews (network issue?) — keeping existing "
+              f"{PLAYSTORE_DATA_PATH}, not overwriting.")
+        return
+
+    os.makedirs("data", exist_ok=True)
+    with open(PLAYSTORE_DATA_PATH, "w", encoding="utf-8") as fh:
+        json.dump(out, fh, ensure_ascii=False, indent=2)
+    print("\n" + "=" * 50)
+    print(f"Saved {len(out['reviews'])} reviews to {PLAYSTORE_DATA_PATH}")
+    print("Re-run analyze.py to fold these into the dashboard.")
+
+
+if __name__ == "__main__":
+    main()
