@@ -66,3 +66,71 @@ TELEHEALTH_APPS = {
     "Doctor on Demand": {"search": ["Doctor On Demand"],
                         "sellers": ["doctor on demand", "included health"]},
     "HealthTap":        {"search": ["HealthTap"], "sellers": ["healthtap"]},
+    "PlushCare":        {"search": ["PlushCare"],
+                        "sellers": ["plushcare", "accolade"]},
+    "Hims & Hers":      {"search": ["Hims", "Hers"],
+                        "sellers": ["hims", "for hims"]},
+    "One Medical":      {"search": ["One Medical"],
+                        "sellers": ["one medical", "1life"]},
+    "Forward Health":   {"search": ["Forward Health"], "sellers": ["forward"]},
+    "Parsley Health":   {"search": ["Parsley Health"], "sellers": ["parsley"]},
+    "Sesame":           {"search": ["Sesame Care"], "sellers": ["sesame"]},
+    "DispatchHealth":   {"search": ["DispatchHealth"],
+                        "sellers": ["dispatchhealth"]},
+    "Heal":             {"search": ["Heal doctor"], "sellers": ["heal"]},
+    "Included Health":  {"search": ["Included Health"],
+                        "sellers": ["included health"]},
+    "Honor":            {"search": ["Honor Care"],
+                        "sellers": ["honor technology", "honor"]},
+    "Care.com":         {"search": ["Care.com"], "sellers": ["care.com"]},
+    "Papa":             {"search": ["Papa Pals"], "sellers": ["papa"]},
+    "Home Instead":     {"search": ["Home Instead"], "sellers": ["home instead"]},
+    "Bayada":           {"search": ["BAYADA"], "sellers": ["bayada"]},
+    "Amazon Pharmacy":  {"search": ["Amazon Pharmacy"],
+                        "sellers": ["amazon"]},
+    "Capsule":          {"search": ["Capsule Pharmacy"], "sellers": ["capsule"]},
+    "Alto Pharmacy":    {"search": ["Alto Pharmacy"], "sellers": ["alto"]},
+}
+EHR_APPS.update(TELEHEALTH_APPS)
+EHR_ORDER = list(EHR_APPS.keys())
+
+
+def get_json(url, params=None):
+    for attempt in range(MAX_RETRIES):
+        try:
+            resp = requests.get(url, params=params, timeout=TIMEOUT)
+        except requests.RequestException as exc:
+            wait = 2 ** attempt
+            print(f"      request error ({exc}); retry in {wait}s")
+            time.sleep(wait)
+            continue
+        if resp.status_code == 200:
+            try:
+                return resp.json()
+            except ValueError:
+                return None
+        if resp.status_code == 429 or 500 <= resp.status_code < 600:
+            wait = 2 ** attempt
+            print(f"      HTTP {resp.status_code}; backoff {wait}s")
+            time.sleep(wait)
+            continue
+        return None
+    return None
+
+
+def find_apps(ehr, cfg):
+    """Return list of {app_id, name, seller, avg_rating, rating_count}."""
+    found = {}
+    for term in cfg["search"]:
+        time.sleep(REQUEST_DELAY)
+        payload = get_json(SEARCH_URL, {
+            "term": term, "entity": "software", "country": "us", "limit": 10})
+        if not payload:
+            continue
+        for app in payload.get("results", []):
+            seller = (app.get("sellerName") or "").lower()
+            name = (app.get("trackName") or "")
+            # Confirm the app belongs to this vendor by seller name.
+            if not any(s in seller for s in cfg["sellers"]):
+                continue
+            app_id = app.get("trackId")
