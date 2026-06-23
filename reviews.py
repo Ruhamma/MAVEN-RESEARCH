@@ -134,3 +134,71 @@ def find_apps(ehr, cfg):
             if not any(s in seller for s in cfg["sellers"]):
                 continue
             app_id = app.get("trackId")
+            if app_id and app_id not in found:
+                found[app_id] = {
+                    "app_id": app_id,
+                    "name": name,
+                    "seller": app.get("sellerName", ""),
+                    "avg_rating": app.get("averageUserRating"),
+                    "rating_count": app.get("userRatingCount", 0),
+                    "url": app.get("trackViewUrl", ""),
+                }
+    return list(found.values())
+
+
+def parse_review_entry(entry, ehr, app):
+    """Normalize one RSS review entry into the shared mention schema."""
+    if not isinstance(entry, dict):
+        return None
+    try:
+        rating = int(entry.get("im:rating", {}).get("label", 0))
+    except (ValueError, TypeError):
+        rating = 0
+    title = entry.get("title", {}).get("label", "") or ""
+    body = entry.get("content", {}).get("label", "") or ""
+    text = (title + ". " + body).strip(". ").strip()
+    if not text:
+        return None
+
+    updated = entry.get("updated", {}).get("label", "")
+    created_utc = 0
+    if updated:
+        try:
+            created_utc = int(datetime.fromisoformat(
+                updated.replace("Z", "+00:00")).timestamp())
+        except ValueError:
+            created_utc = 0
+
+    return {
+        "ehr": ehr,
+        "matched_term": app["name"],
+        "kind": "appstore_review",
+        "source": "appstore",
+        "text": text,
+        "score": 0,                       # App Store has no upvotes
+        "star_rating": rating,            # 1-5, ground-truth sentiment
+        "subreddit": f"AppStore: {app['name']}",  # reuse 'subreddit' as source
+        "permalink": app.get("url", ""),
+        "created_utc": created_utc,
+        "id": entry.get("id", {}).get("label", ""),
+    }
+
+
+def fetch_reviews(app):
+    """Pull all available RSS review pages for one app."""
+    reviews = []
+    for page in range(1, MAX_REVIEW_PAGES + 1):
+        time.sleep(REQUEST_DELAY)
+        payload = get_json(RSS_TMPL.format(app_id=app["app_id"], page=page))
+        if not payload:
+            break
+        entries = payload.get("feed", {}).get("entry", [])
+        # Apple returns a single review as a dict, not a list — normalize.
+        if isinstance(entries, dict):
+            entries = [entries]
+        if not entries:
+            break
+        # On page 1 the first entry is app metadata, not a review.
+        if page == 1 and entries and "im:rating" not in entries[0]:
+            entries = entries[1:]
+        if not entries:
