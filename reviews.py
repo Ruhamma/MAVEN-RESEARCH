@@ -202,3 +202,70 @@ def fetch_reviews(app):
         if page == 1 and entries and "im:rating" not in entries[0]:
             entries = entries[1:]
         if not entries:
+            break
+        for e in entries:
+            r = parse_review_entry(e, app["_ehr"], app)
+            if r:
+                reviews.append(r)
+    return reviews
+
+
+def main():
+    out = {
+        "fetched_at": datetime.now(timezone.utc).isoformat(),
+        "ehr_order": EHR_ORDER,
+        "apps": {},        # per-EHR app metadata (official ratings)
+        "reviews": [],     # flat list, shared mention schema
+    }
+    seen_ids = set()
+
+    for ehr, cfg in EHR_APPS.items():
+        print(f"\n=== {ehr} ===")
+        apps = find_apps(ehr, cfg)
+        if not apps:
+            print("  no matching apps found")
+            out["apps"][ehr] = []
+            continue
+
+        out["apps"][ehr] = [{k: a[k] for k in
+                             ("app_id", "name", "seller", "avg_rating",
+                              "rating_count", "url")} for a in apps]
+
+        for app in apps:
+            app["_ehr"] = ehr
+            rc = app.get("rating_count") or 0
+            ar = app.get("avg_rating")
+            print(f"  app '{app['name']}' "
+                  f"(official {ar}★ / {rc} ratings)")
+            try:
+                revs = fetch_reviews(app)
+            except Exception as exc:        # never let one app abort the run
+                print(f"    skipped app ({exc})")
+                revs = []
+            added = 0
+            for r in revs:
+                if r["id"] and r["id"] in seen_ids:
+                    continue
+                seen_ids.add(r["id"])
+                out["reviews"].append(r)
+                added += 1
+            print(f"    +{added} reviews pulled")
+
+    # Safety: don't clobber a good cache with an empty pull (e.g. if the
+    # network dropped mid-run). Keep the existing file instead.
+    if not out["reviews"] and os.path.exists(REVIEWS_DATA_PATH):
+        print("\nPulled 0 reviews (network issue?) — keeping existing "
+              f"{REVIEWS_DATA_PATH}, not overwriting.")
+        return
+
+    os.makedirs("data", exist_ok=True)
+    with open(REVIEWS_DATA_PATH, "w", encoding="utf-8") as fh:
+        json.dump(out, fh, ensure_ascii=False, indent=2)
+
+    print("\n" + "=" * 50)
+    print(f"Saved {len(out['reviews'])} reviews to {REVIEWS_DATA_PATH}")
+    print("Re-run analyze.py to fold these into the dashboard.")
+
+
+if __name__ == "__main__":
+    main()
