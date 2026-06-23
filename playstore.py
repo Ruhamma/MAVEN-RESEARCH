@@ -66,3 +66,70 @@ TELEHEALTH_APPS = {
     "Parsley Health":   {"search": ["Parsley Health"], "devs": ["parsley"]},
     "Sesame":           {"search": ["Sesame Care"], "devs": ["sesame"]},
     "DispatchHealth":   {"search": ["DispatchHealth"], "devs": ["dispatchhealth"]},
+    "Heal":             {"search": ["Heal doctor"], "devs": ["heal"]},
+    "Included Health":  {"search": ["Included Health"],
+                        "devs": ["included health"]},
+    "Honor":            {"search": ["Honor Care"],
+                        "devs": ["honor technology", "honor"]},
+    "Care.com":         {"search": ["Care.com"], "devs": ["care.com"]},
+    "Papa":             {"search": ["Papa Pals"], "devs": ["papa"]},
+    "Home Instead":     {"search": ["Home Instead"], "devs": ["home instead"]},
+    "Bayada":           {"search": ["BAYADA"], "devs": ["bayada"]},
+    "Amazon Pharmacy":  {"search": ["Amazon Pharmacy"], "devs": ["amazon"]},
+    "Capsule":          {"search": ["Capsule Pharmacy"], "devs": ["capsule"]},
+    "Alto Pharmacy":    {"search": ["Alto Pharmacy"], "devs": ["alto"]},
+}
+EHR_APPS.update(TELEHEALTH_APPS)
+EHR_ORDER = list(EHR_APPS.keys())
+
+
+def find_apps(cfg):
+    """Return {app_id: {app_id, title, developer}} matched by developer name."""
+    found = {}
+    for term in cfg["search"]:
+        time.sleep(REQUEST_DELAY)
+        try:
+            hits = search(term, n_hits=8, lang="en", country="us")
+        except Exception as exc:
+            print(f"      search error ({exc})")
+            continue
+        for a in hits:
+            app_id = a.get("appId")
+            dev = (a.get("developer") or "").lower()
+            if not app_id:
+                continue
+            if not any(d in dev for d in cfg["devs"]):
+                continue
+            if app_id not in found:
+                found[app_id] = {
+                    "app_id": app_id,
+                    "title": a.get("title", ""),
+                    "developer": a.get("developer", ""),
+                    "avg_rating": a.get("score"),
+                }
+    return found
+
+
+def pull_reviews(app_id):
+    """Pull up to REVIEW_CAP newest reviews for one app."""
+    try:
+        res, _ = reviews(app_id, count=REVIEW_CAP, lang="en", country="us",
+                         sort=Sort.NEWEST)
+        return res
+    except Exception as exc:
+        print(f"      reviews error ({exc})")
+        return []
+
+
+def to_epoch(dt):
+    if not isinstance(dt, datetime):
+        return 0
+    try:
+        return int(dt.replace(tzinfo=timezone.utc).timestamp())
+    except (ValueError, OverflowError):
+        return 0
+
+
+def normalize(r, ehr, app):
+    text = (r.get("content") or "").strip()
+    if not text:
