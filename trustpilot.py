@@ -138,3 +138,72 @@ def scrape_entity(page, entity, domain):
         if pno > 1:
             url += f"?page={pno}"
         try:
+            page.goto(url, wait_until="domcontentloaded", timeout=NAV_TIMEOUT)
+            page.wait_for_timeout(RENDER_WAIT)
+            html = page.content()
+        except Exception as exc:
+            print(f"    page {pno} error ({type(exc).__name__}); stopping")
+            break
+
+        revs, meta = parse_reviews(html, entity, domain)
+        if meta and meta.get("name"):
+            bu_meta = meta
+        if not revs:
+            break
+        new = 0
+        for rv in revs:
+            if rv["id"] in seen:
+                continue
+            seen.add(rv["id"])
+            reviews.append(rv)
+            new += 1
+        if new == 0:           # no fresh reviews -> last page reached
+            break
+        time.sleep(PAGE_DELAY)
+    return reviews, bu_meta
+
+
+def main():
+    out = {
+        "fetched_at": datetime.now(timezone.utc).isoformat(),
+        "businesses": {},
+        "reviews": [],
+    }
+
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        ctx = browser.new_context(
+            user_agent=("Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                        "AppleWebKit/537.36 (KHTML, like Gecko) "
+                        "Chrome/121.0 Safari/537.36"),
+            locale="en-US")
+        page = ctx.new_page()
+
+        for entity, domain in DOMAINS.items():
+            print(f"\n=== {entity} ({domain}) ===", flush=True)
+            try:
+                revs, meta = scrape_entity(page, entity, domain)
+            except Exception as exc:
+                print(f"    skipped ({type(exc).__name__}: {str(exc)[:80]})")
+                revs, meta = [], None
+            out["reviews"].extend(revs)
+            if meta:
+                out["businesses"][entity] = {**meta, "domain": domain}
+                print(f"    {meta.get('name')} | {meta.get('trust_score')}★ "
+                      f"of {meta.get('total_reviews')} | +{len(revs)} reviews")
+            else:
+                print(f"    no reviews parsed (+{len(revs)})")
+
+        browser.close()
+
+    os.makedirs("data", exist_ok=True)
+    with open(TRUSTPILOT_DATA_PATH, "w", encoding="utf-8") as fh:
+        json.dump(out, fh, ensure_ascii=False, indent=2)
+    print("\n" + "=" * 50)
+    print(f"Saved {len(out['reviews'])} Trustpilot reviews to "
+          f"{TRUSTPILOT_DATA_PATH}")
+    print("Re-run analyze.py to fold these into the dashboard.")
+
+
+if __name__ == "__main__":
+    main()
