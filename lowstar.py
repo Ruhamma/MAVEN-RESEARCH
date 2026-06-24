@@ -107,3 +107,57 @@ def save(out):
 
 
 def main():
+    # Resume: load any existing file and skip entities already scraped.
+    out = {
+        "fetched_at": datetime.now(timezone.utc).isoformat(),
+        "star_filter": "1-3",
+        "entities": {},
+    }
+    if os.path.exists(LOWSTAR_DATA_PATH):
+        try:
+            with open(LOWSTAR_DATA_PATH, "r", encoding="utf-8") as fh:
+                prev = json.load(fh)
+            out["entities"] = prev.get("entities", {})
+            if out["entities"]:
+                print(f"Resuming: {len(out['entities'])} entities already done.")
+        except (ValueError, OSError):
+            pass
+
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        ctx = browser.new_context(
+            user_agent=("Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                        "AppleWebKit/537.36 (KHTML, like Gecko) "
+                        "Chrome/121.0 Safari/537.36"),
+            locale="en-US")
+        page = ctx.new_page()
+
+        for entity, domain in DOMAINS.items():
+            if entity in out["entities"]:
+                print(f"\n=== {entity} — already done, skipping ===")
+                continue
+            print(f"\n=== {entity} ({domain}) ===", flush=True)
+            try:
+                revs = scrape_lowstar(page, entity, domain)
+            except Exception as exc:
+                print(f"    skipped ({type(exc).__name__}: {str(exc)[:80]})")
+                revs = []
+            # Record the entity either way (empty summary marks it attempted,
+            # so a resume doesn't re-hit dead domains).
+            out["entities"][entity] = summarize(entity, revs)
+            top = out["entities"][entity]["top_complaints"][:3]
+            print(f"    {len(revs)} low-star reviews | top: "
+                  f"{', '.join(f'{t}({n})' for t, n in top) or '—'}")
+            save(out)            # persist after each entity -> resumable
+
+        browser.close()
+
+    save(out)
+    total = sum(e["count"] for e in out["entities"].values())
+    print("\n" + "=" * 50)
+    print(f"Saved {total} low-star reviews across "
+          f"{len(out['entities'])} entities to {LOWSTAR_DATA_PATH}")
+
+
+if __name__ == "__main__":
+    main()
