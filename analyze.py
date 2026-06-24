@@ -120,3 +120,65 @@ SWITCHING_PHRASES = [
     "moving off", "moved off", "move away from", "migrate off",
     "migrating off", "migrate away", "migrating away",
     "leaving", "ditch", "ditched", "dumping", "dumped", "get rid of",
+    "looking for an alternative", "looking for alternatives",
+    "alternative to", "alternatives to", "anything better than",
+    "replace our", "replacing our", "fed up with", "done with",
+    "regret choosing", "regret going", "regret switching",
+    "want to switch", "thinking of switching", "considering switching",
+]
+
+
+def match_themes(text_lower, theme_map):
+    """Return list of theme names whose any keyword appears in text."""
+    hits = []
+    for theme, keywords in theme_map.items():
+        if any(kw in text_lower for kw in keywords):
+            hits.append(theme)
+    return hits
+
+
+def detect_switching(text_lower):
+    """Return list of switching/churn phrases found in the text."""
+    return [p for p in SWITCHING_PHRASES if p in text_lower]
+
+
+def classify(compound):
+    if compound >= POS_THRESHOLD:
+        return "positive"
+    if compound <= NEG_THRESHOLD:
+        return "negative"
+    return "neutral"
+
+
+def empty_ehr_record(category=CATEGORY_EHR):
+    return {
+        "category": category,
+        "total": 0,
+        "positive": 0, "neutral": 0, "negative": 0,
+        "pct_positive": 0.0, "pct_neutral": 0.0, "pct_negative": 0.0,
+        "avg_compound": 0.0,
+        "top_complaints": [],
+        "top_praises": [],
+        "complaint_counts": {},
+        "switching_count": 0,
+        "mentions": [],
+        "has_data": False,
+    }
+
+
+def analyze():
+    if not os.path.exists(RAW_DATA_PATH):
+        raise SystemExit(
+            f"{RAW_DATA_PATH} not found. Run fetch.py first.")
+
+    with open(RAW_DATA_PATH, "r", encoding="utf-8") as fh:
+        raw = json.load(fh)
+
+    mentions = list(raw.get("mentions", []))
+
+    # Optionally fold in free app-store reviews (reviews.py = Apple,
+    # playstore.py = Google Play). Same schema, so they flow through sentiment +
+    # theme analysis like any other mention.
+    for label, path in (("App Store", REVIEWS_DATA_PATH),
+                        ("Google Play", PLAYSTORE_DATA_PATH),
+                        ("Trustpilot", TRUSTPILOT_DATA_PATH),
