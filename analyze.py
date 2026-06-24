@@ -243,3 +243,63 @@ def analyze():
             "compound": round(compound, 4),
             "complaints": complaints,
             "praises": praises,
+            "switching": switching,
+        })
+
+    # Finalize aggregates.
+    for ehr, rec in records.items():
+        total = rec["total"]
+        if total == 0:
+            rec["has_data"] = False
+            continue
+        rec["has_data"] = True
+        rec["pct_positive"] = round(100.0 * rec["positive"] / total, 1)
+        rec["pct_neutral"] = round(100.0 * rec["neutral"] / total, 1)
+        rec["pct_negative"] = round(100.0 * rec["negative"] / total, 1)
+        rec["avg_compound"] = round(compound_sums[ehr] / total, 4)
+        rec["top_complaints"] = complaint_counters[ehr].most_common(5)
+        rec["top_praises"] = praise_counters[ehr].most_common(5)
+        # Full per-theme complaint counts for the cross-vendor heatmap.
+        rec["complaint_counts"] = dict(complaint_counters[ehr])
+
+    out = {
+        "analyzed_at": datetime.now(timezone.utc).isoformat(),
+        "source_fetched_at": raw.get("fetched_at"),
+        "window_after": raw.get("window_after"),
+        "window_before": raw.get("window_before"),
+        "ehr_order": ENTITY_ORDER,
+        "ehr_order_by_category": {
+            CATEGORY_EHR: EHR_ORDER,
+            CATEGORY_TELEHEALTH: TELEHEALTH_ORDER,
+        },
+        "complaint_theme_names": list(COMPLAINT_THEMES.keys()),
+        "ehrs": records,
+    }
+
+    os.makedirs("data", exist_ok=True)
+    with open(ANALYZED_DATA_PATH, "w", encoding="utf-8") as fh:
+        json.dump(out, fh, ensure_ascii=False, indent=2)
+
+    print_report(records)
+    print(f"\nSaved analysis to {ANALYZED_DATA_PATH}")
+
+
+def print_report(records):
+    for category, order in ((CATEGORY_EHR, EHR_ORDER),
+                            (CATEGORY_TELEHEALTH, TELEHEALTH_ORDER)):
+        print("=" * 64)
+        print(f"[{category}]")
+        print(f"{'entity':<22}{'mentions':>9}{'%pos':>7}{'%neg':>7}{'avg':>8}")
+        print("-" * 64)
+        for ehr in order:
+            rec = records.get(ehr, empty_ehr_record())
+            if not rec["has_data"]:
+                print(f"{ehr:<22}{'no data':>9}")
+                continue
+            print(f"{ehr:<22}{rec['total']:>9}{rec['pct_positive']:>7}"
+                  f"{rec['pct_negative']:>7}{rec['avg_compound']:>8}")
+    print("=" * 64)
+
+
+if __name__ == "__main__":
+    analyze()
