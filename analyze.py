@@ -59,3 +59,64 @@ COMPLAINT_THEMES = {
                             "migrate", "migration", "data hostage",
                             "hold your data", "can't get my data"],
     "denials": ["denial", "denied", "rejected claim", "claim rejection",
+                "claim denied", "rejection"],
+    "training/learning curve": ["learning curve", "hard to learn", "steep",
+                                "confusing", "not intuitive", "training"],
+    "bugs/glitches": ["bug", "buggy", "glitch", "glitchy", "broken",
+                      "error message", "errors"],
+    "customer service": ["customer service", "rude", "poor service",
+                        "horrible service", "terrible service", "no one answers"],
+    "contract/cancellation": ["contract", "cancel", "cancellation",
+                             "termination fee", "locked into a contract",
+                             "can't cancel", "stuck in contract"],
+    # Telehealth / home-care specific frustrations (harmless for EHRs — they
+    # simply won't match). These surface "most frustrating points" for the
+    # marketplace competitors.
+    "caregiver no-show/reliability": ["no show", "no-show", "didn't show",
+                                      "never showed", "late", "unreliable",
+                                      "flaked", "cancelled on me", "ghosted"],
+    "scheduling/availability": ["no availability", "can't book", "couldn't book",
+                               "no appointments", "fully booked", "waitlist",
+                               "hard to schedule", "reschedule"],
+    "wait time": ["long wait", "waiting", "hours to", "took forever",
+                  "still waiting", "on hold"],
+    "refund/charge dispute": ["refund", "won't refund", "charged me",
+                             "charged twice", "no refund", "dispute",
+                             "money back"],
+    "caregiver/provider quality": ["unqualified", "incompetent", "rude nurse",
+                                   "bad caregiver", "not vetted", "untrained",
+                                   "rude doctor", "dismissive"],
+    "insurance/coverage": ["not covered", "doesn't take insurance",
+                          "out of network", "denied coverage",
+                          "insurance won't"],
+    "prescription/pharmacy": ["prescription", "pharmacy", "refill", "meds",
+                             "didn't send", "wrong medication", "delivery"],
+}
+
+PRAISE_THEMES = {
+    "easy/intuitive": ["easy to use", "intuitive", "user friendly",
+                      "user-friendly", "simple to use", "easy"],
+    "mobile/iPad": ["mobile", "ipad", "iphone", "tablet", "mobile app",
+                   "phone app"],
+    "fast": ["fast", "quick", "snappy", "responsive", "speedy"],
+    "customizable": ["customizable", "customize", "customisable", "flexible",
+                    "configurable", "templates"],
+    "good support": ["great support", "good support", "helpful support",
+                    "responsive support", "excellent support",
+                    "support is great"],
+    "integration": ["integration", "integrate", "interoperability",
+                   "interface", "api", "connects with"],
+}
+
+
+# --------------------------------------------------------------------------- #
+# Switching / churn signals — phrases that suggest a user is leaving or
+# shopping for an alternative. A mention flagged here for EHR X means X is
+# (likely) being abandoned → a customer MavenMD could poach.
+# --------------------------------------------------------------------------- #
+
+SWITCHING_PHRASES = [
+    "switch from", "switching from", "switched from", "switch away",
+    "moving off", "moved off", "move away from", "migrate off",
+    "migrating off", "migrate away", "migrating away",
+    "leaving", "ditch", "ditched", "dumping", "dumped", "get rid of",
