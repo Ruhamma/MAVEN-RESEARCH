@@ -182,3 +182,64 @@ def analyze():
     for label, path in (("App Store", REVIEWS_DATA_PATH),
                         ("Google Play", PLAYSTORE_DATA_PATH),
                         ("Trustpilot", TRUSTPILOT_DATA_PATH),
+                        ("manual (G2/Capterra/etc)", MANUAL_DATA_PATH)):
+        if os.path.exists(path):
+            with open(path, "r", encoding="utf-8") as fh:
+                extra = json.load(fh)
+            extra_mentions = extra.get("reviews", [])
+            mentions.extend(extra_mentions)
+            print(f"Merged {len(extra_mentions)} {label} reviews into analysis.")
+
+    sia = SentimentIntensityAnalyzer()
+
+    # Per-entity accumulators (EHR + telehealth competitors).
+    records = {e: empty_ehr_record(ENTITY_CATEGORY.get(e, CATEGORY_EHR))
+               for e in ENTITY_ORDER}
+    complaint_counters = {e: Counter() for e in ENTITY_ORDER}
+    praise_counters = {e: Counter() for e in ENTITY_ORDER}
+    compound_sums = {e: 0.0 for e in ENTITY_ORDER}
+
+    for m in mentions:
+        ehr = m.get("ehr")
+        if ehr not in records:
+            # Unknown entity label — register it so nothing is silently dropped.
+            cat = m.get("category") or ENTITY_CATEGORY.get(ehr, CATEGORY_EHR)
+            records[ehr] = empty_ehr_record(cat)
+            complaint_counters[ehr] = Counter()
+            praise_counters[ehr] = Counter()
+            compound_sums[ehr] = 0.0
+
+        text = m.get("text", "") or ""
+        text_lower = text.lower()
+
+        compound = sia.polarity_scores(text)["compound"]
+        sentiment = classify(compound)
+
+        complaints = match_themes(text_lower, COMPLAINT_THEMES)
+        praises = match_themes(text_lower, PRAISE_THEMES)
+        switching = detect_switching(text_lower)
+
+        rec = records[ehr]
+        rec["total"] += 1
+        rec[sentiment] += 1
+        compound_sums[ehr] += compound
+        complaint_counters[ehr].update(complaints)
+        praise_counters[ehr].update(praises)
+        if switching:
+            rec["switching_count"] += 1
+
+        # Light per-mention record for the dashboard (no usernames stored).
+        rec["mentions"].append({
+            "text": text,
+            "score": m.get("score", 0),
+            "subreddit": m.get("subreddit", ""),
+            "permalink": m.get("permalink", ""),
+            "created_utc": m.get("created_utc", 0),
+            "kind": m.get("kind", ""),
+            "source": m.get("source", "reddit"),
+            "star_rating": m.get("star_rating"),     # set for App Store reviews
+            "matched_term": m.get("matched_term", ""),
+            "sentiment": sentiment,
+            "compound": round(compound, 4),
+            "complaints": complaints,
+            "praises": praises,
