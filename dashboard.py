@@ -436,3 +436,66 @@ def view_appstore(data):
     fetched = (apple or {}).get("fetched_at") or (play or {}).get("fetched_at")
     st.caption(f"App-review data fetched: {fetched or 'n/a'}")
 
+
+def view_market_presence(data):
+    st.header("Market Presence — ONC CHPL certified products")
+    chpl = load_chpl()
+    if chpl is None:
+        st.info(
+            "CHPL data not configured. This is optional government data on "
+            "certified EHR products.\n\n"
+            "1. Get a free API key: https://chpl.healthit.gov/#/resources/api\n"
+            "2. `export CHPL_API_KEY=your-key` (or put it in `chpl_api_key.txt`)\n"
+            "3. Run `python chpl.py`, then reload this page.")
+        return
+
+    st.caption(
+        "Official US registry of certified Health IT products. "
+        "`declined` = withdrawn / retired / terminated certifications — a "
+        "vendor decline signal. Latest cert date shows how actively a vendor "
+        "still invests in certification.")
+
+    rows = []
+    for ehr in chpl.get("ehr_order", []):
+        rec = chpl["ehrs"].get(ehr, {})
+        rows.append({
+            "EHR": ehr,
+            "certified products": rec.get("total_products", 0),
+            "active": rec.get("active_products", 0),
+            "declined (withdrawn/retired)": rec.get("declined_products", 0),
+            "latest cert date": rec.get("latest_cert_date") or "—",
+        })
+    df = pd.DataFrame(rows)
+    st.dataframe(df, hide_index=True, use_container_width=True)
+
+    has = df[df["certified products"] > 0]
+    if not has.empty:
+        c1, c2 = st.columns(2)
+        with c1:
+            st.subheader("Active certified products")
+            d = has.sort_values("active", ascending=True)
+            fig = go.Figure(go.Bar(x=d["active"], y=d["EHR"], orientation="h",
+                                   marker_color="#1f77b4", text=d["active"],
+                                   textposition="auto"))
+            fig.update_layout(height=360, margin=dict(l=10, r=10, t=10, b=10))
+            st.plotly_chart(fig, use_container_width=True)
+        with c2:
+            st.subheader("Declined certifications")
+            d2 = has.sort_values("declined (withdrawn/retired)", ascending=True)
+            fig2 = go.Figure(go.Bar(
+                x=d2["declined (withdrawn/retired)"], y=d2["EHR"],
+                orientation="h", marker_color="#d62728",
+                text=d2["declined (withdrawn/retired)"], textposition="auto"))
+            fig2.update_layout(height=360, margin=dict(l=10, r=10, t=10, b=10))
+            st.plotly_chart(fig2, use_container_width=True)
+
+    st.caption(f"CHPL data fetched: {chpl.get('fetched_at', 'n/a')}")
+
+
+def view_overview(data):
+    st.header("Overview")
+
+    df = overview_df(data)
+    has = df[df["has_data"]]
+
+    if has.empty:
