@@ -687,3 +687,66 @@ def view_comparison(data):
     rows = []
     for ehr in data["ehr_order"]:
         rec = data["ehrs"].get(ehr, {})
+        if not rec.get("has_data"):
+            rows.append({
+                "EHR": ehr, "mentions": 0, "% positive": "—",
+                "% negative": "—", "avg sentiment": "—",
+                "top complaint": "no data", "top praise": "no data",
+            })
+            continue
+        rows.append({
+            "EHR": ehr,
+            "mentions": rec["total"],
+            "% positive": rec["pct_positive"],
+            "% negative": rec["pct_negative"],
+            "avg sentiment": rec["avg_compound"],
+            "top complaint": top_theme_label(rec["top_complaints"]),
+            "top praise": top_theme_label(rec["top_praises"]),
+        })
+    df = pd.DataFrame(rows)
+    st.dataframe(df, hide_index=True, use_container_width=True)
+    st.caption(
+        f"Cells show '—' / 'no data' where a vendor had zero mentions. "
+        f"Mentions under ~{LOW_VOLUME_THRESHOLD} are low-confidence.")
+
+
+def view_gap_analysis(data):
+    st.header("Gap Analysis — competitor weakness → MavenMD opportunity")
+
+    gaps = load_gaps()
+    if gaps is None:
+        st.error(f"{GAPS_CSV_PATH} not found. Create it with columns: "
+                 "EHR, top_complaint, mavenmd_opportunity.")
+        return
+
+    st.caption("Source: data/gaps.csv (editable). Maps each competitor's key "
+               "weakness to a MavenMD product opportunity.")
+
+    styled = gaps.style.set_properties(**{
+        "white-space": "normal",
+        "text-align": "left",
+        "vertical-align": "top",
+    }).set_table_styles([
+        {"selector": "th", "props": [("text-align", "left"),
+                                     ("background-color", "#1f3b57"),
+                                     ("color", "white")]},
+    ])
+    st.table(styled)
+
+
+def view_lowstar(data):
+    st.header("Pain Points — Low-Star Reviews (1–3★)")
+    low = load_lowstar()
+    if low is None:
+        st.info("Low-star data not found. Run `python lowstar.py` (scrapes only "
+                "1–3★ Trustpilot reviews), then reload.")
+        return
+
+    st.caption("Only 1–3★ Trustpilot reviews — the unhappy customers. Shows the "
+               "usual complaints per platform: where each competitor loses "
+               "people, i.e. exactly where MavenMD can win.")
+
+    # Restrict to entities in the current segment.
+    seg = set(data.get("ehr_order", []))
+    entities = {k: v for k, v in low.get("entities", {}).items()
+                if (not seg) or k in seg}
