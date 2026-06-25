@@ -499,3 +499,66 @@ def view_overview(data):
     has = df[df["has_data"]]
 
     if has.empty:
+        st.info("No data available. Run fetch.py then analyze.py.")
+        return
+
+    st.caption(
+        f"Low-volume EHRs (under ~{LOW_VOLUME_THRESHOLD} mentions) should be "
+        "interpreted cautiously — a handful of comments is not a trend.")
+
+    col1, col2 = st.columns(2)
+
+    # Avg sentiment, ranked best -> worst.
+    with col1:
+        st.subheader("Average sentiment (best → worst)")
+        ranked = has.sort_values("avg_sentiment", ascending=True)  # asc -> top=worst; plot grows up
+        colors = ["#d62728" if v < 0 else "#2ca02c" for v in ranked["avg_sentiment"]]
+        fig = go.Figure(go.Bar(
+            x=ranked["avg_sentiment"],
+            y=ranked["EHR"],
+            orientation="h",
+            marker_color=colors,
+            text=[f"{v:+.2f}" for v in ranked["avg_sentiment"]],
+            textposition="auto",
+        ))
+        fig.update_layout(
+            xaxis_title="VADER compound (avg)",
+            yaxis_title="",
+            height=400,
+            margin=dict(l=10, r=10, t=10, b=10),
+        )
+        st.plotly_chart(fig, use_container_width=True)
+
+    # Mention volume.
+    with col2:
+        st.subheader("Mention volume")
+        vol = has.sort_values("mentions", ascending=True)
+        fig2 = go.Figure(go.Bar(
+            x=vol["mentions"],
+            y=vol["EHR"],
+            orientation="h",
+            marker_color="#1f77b4",
+            text=vol["mentions"],
+            textposition="auto",
+        ))
+        fig2.add_vline(x=LOW_VOLUME_THRESHOLD, line_dash="dash",
+                       line_color="gray",
+                       annotation_text=f"~{LOW_VOLUME_THRESHOLD}",
+                       annotation_position="top")
+        fig2.update_layout(
+            xaxis_title="mentions",
+            yaxis_title="",
+            height=400,
+            margin=dict(l=10, r=10, t=10, b=10),
+        )
+        st.plotly_chart(fig2, use_container_width=True)
+
+
+def view_per_system(data):
+    st.header("Per-System Detail")
+
+    ehr = st.selectbox("Select EHR", data["ehr_order"])
+    rec = data["ehrs"].get(ehr, {})
+
+    if not rec.get("has_data"):
+        st.warning(f"No data available for {ehr}.")
