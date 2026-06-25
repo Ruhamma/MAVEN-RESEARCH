@@ -562,3 +562,66 @@ def view_per_system(data):
 
     if not rec.get("has_data"):
         st.warning(f"No data available for {ehr}.")
+        return
+
+    total = rec["total"]
+    if total < LOW_VOLUME_THRESHOLD:
+        st.caption(f"⚠️ Only {total} mentions — interpret cautiously.")
+
+    # Data volume + where it came from.
+    st.subheader("Data volume & sources")
+    src_counts = Counter()
+    for m in rec.get("mentions", []):
+        s = (m.get("source") or "reddit")
+        if s == "appstore":
+            src_counts["App Store"] += 1
+        elif s == "googleplay":
+            src_counts["Google Play"] += 1
+        elif s == "trustpilot":
+            src_counts["Trustpilot"] += 1
+        elif s.startswith("manual"):
+            src_counts["Manual (G2/Capterra)"] += 1
+        else:
+            src_counts["Reddit"] += 1
+
+    # Fixed display order: Trustpilot, App Store, Google Play, manual, Reddit.
+    label_order = ["Trustpilot", "App Store", "Google Play",
+                   "Manual (G2/Capterra)", "Reddit"]
+    ordered = sorted(src_counts.items(),
+                     key=lambda kv: label_order.index(kv[0])
+                     if kv[0] in label_order else 99)
+    cols = st.columns(len(ordered) + 1)
+    cols[0].metric(f"{ehr} total", total)
+    for col, (label, n) in zip(cols[1:], ordered):
+        pct = round(100.0 * n / total, 1) if total else 0
+        col.metric(label, n, f"{pct}%")
+
+    st.caption(
+        f"Grand total across all vendors: "
+        f"{sum(r.get('total', 0) for r in data['ehrs'].values())} data points "
+        f"(Reddit + App Store + Google Play + any manual imports).")
+
+    c1, c2 = st.columns([1, 1])
+
+    # Sentiment breakdown pie.
+    with c1:
+        st.subheader("Sentiment breakdown")
+        pie_df = pd.DataFrame({
+            "sentiment": ["positive", "neutral", "negative"],
+            "count": [rec["positive"], rec["neutral"], rec["negative"]],
+        })
+        fig = px.pie(pie_df, names="sentiment", values="count",
+                     color="sentiment", color_discrete_map=SENTIMENT_COLORS,
+                     hole=0.4)
+        fig.update_layout(height=320, margin=dict(l=10, r=10, t=10, b=10))
+        st.plotly_chart(fig, use_container_width=True)
+        st.metric("Total mentions", total)
+        st.metric("Avg sentiment", f"{rec['avg_compound']:+.3f}")
+
+    # Themes.
+    with c2:
+        st.subheader("Top complaints")
+        if rec["top_complaints"]:
+            comp_df = pd.DataFrame(rec["top_complaints"],
+                                   columns=["theme", "count"])
+            st.dataframe(comp_df, hide_index=True, use_container_width=True)
