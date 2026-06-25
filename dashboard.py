@@ -249,3 +249,65 @@ def view_heatmap(data):
         "the market gap MavenMD can own. Read across, not down.")
 
     themes = data.get("complaint_theme_names", [])
+    ehrs = [e for e in data["ehr_order"]
+            if data["ehrs"].get(e, {}).get("has_data")]
+    if not themes or not ehrs:
+        st.info("No data available.")
+        return
+
+    normalize = st.radio(
+        "Cell value",
+        ["% of vendor's mentions", "raw count"],
+        horizontal=True)
+
+    matrix = []
+    for theme in themes:
+        row = []
+        for ehr in ehrs:
+            rec = data["ehrs"][ehr]
+            cnt = rec.get("complaint_counts", {}).get(theme, 0)
+            if normalize == "% of vendor's mentions":
+                total = rec.get("total", 0)
+                row.append(round(100.0 * cnt / total, 1) if total else 0.0)
+            else:
+                row.append(cnt)
+        matrix.append(row)
+
+    fig = go.Figure(go.Heatmap(
+        z=matrix, x=ehrs, y=themes,
+        colorscale="Reds",
+        text=matrix, texttemplate="%{text}",
+        colorbar_title="%" if normalize.startswith("%") else "count"))
+    fig.update_layout(height=520, margin=dict(l=10, r=10, t=10, b=10),
+                      xaxis_title="", yaxis_title="complaint theme")
+    st.plotly_chart(fig, use_container_width=True)
+
+    # Auto-surface the universal gap: theme with highest mean % across vendors.
+    means = []
+    for i, theme in enumerate(themes):
+        pcts = []
+        for j, ehr in enumerate(ehrs):
+            rec = data["ehrs"][ehr]
+            total = rec.get("total", 0)
+            cnt = rec.get("complaint_counts", {}).get(theme, 0)
+            if total:
+                pcts.append(100.0 * cnt / total)
+        if pcts:
+            means.append((theme, sum(pcts) / len(pcts)))
+    means.sort(key=lambda x: x[1], reverse=True)
+    if means:
+        top = means[0]
+        st.success(
+            f"**Biggest cross-vendor gap:** `{top[0]}` — complained about in "
+            f"~{top[1]:.1f}% of mentions on average across all vendors. "
+            "Everyone fails here. Wedge candidate.")
+
+
+def _store_avg_rows(store_data, name_key):
+    """Per-EHR weighted-avg star rating from a store's app metadata."""
+    rows = {}
+    if not store_data:
+        return rows
+    for ehr in store_data.get("ehr_order", []):
+        apps = store_data.get("apps", {}).get(ehr, [])
+        # Apple uses rating_count; Play search gives only avg per app (weight 1).
