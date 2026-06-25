@@ -374,3 +374,65 @@ def view_appstore(data):
         if ms:
             review_ms[ehr] = ms
     if not review_ms:
+        st.info("No store reviews in the analysis yet — run analyze.py after "
+                "reviews.py / playstore.py.")
+        return
+
+    # Top complaints from app reviews (Apple + Play only).
+    st.subheader("Top complaints (from app reviews)")
+    overall = Counter()
+    per_vendor = {}
+    for ehr, ms in review_ms.items():
+        c = Counter()
+        for m in ms:
+            for theme in m.get("complaints", []):
+                c[theme] += 1
+                overall[theme] += 1
+        per_vendor[ehr] = c
+    if overall:
+        comp_df = pd.DataFrame(overall.most_common(10),
+                               columns=["complaint theme", "mentions"])
+        d = comp_df.sort_values("mentions", ascending=True)
+        fig = go.Figure(go.Bar(
+            x=d["mentions"], y=d["complaint theme"], orientation="h",
+            marker_color="#d62728", text=d["mentions"], textposition="auto"))
+        fig.update_layout(height=360, margin=dict(l=10, r=10, t=10, b=10),
+                          xaxis_title="app-review mentions")
+        st.plotly_chart(fig, use_container_width=True)
+    else:
+        st.write("No complaint themes detected in app reviews.")
+
+    # Sample review quotes from analyzed mentions (Apple + Play).
+    st.subheader("Sample reviews")
+    pick = st.selectbox("Vendor", list(review_ms.keys()))
+    pv = per_vendor.get(pick, Counter())
+    if pv:
+        st.caption("**" + pick + "** top app-review complaints: " +
+                   ", ".join(f"{t} ({n})" for t, n in pv.most_common(5)))
+    src_filter = st.multiselect("Store", ["Apple", "Google Play"],
+                                default=["Apple", "Google Play"])
+    ms = [m for m in review_ms[pick]
+          if store_label.get(m.get("source")) in src_filter]
+    ms.sort(key=lambda m: m.get("star_rating") or 0)
+    qrows = []
+    for m in ms:
+        text = m["text"].replace("\n", " ").strip()
+        if len(text) > 300:
+            text = text[:300] + "…"
+        qrows.append({
+            "store": store_label.get(m.get("source"), ""),
+            "stars": (m.get("star_rating") or 0),
+            "VADER": m["sentiment"],
+            "quote": text,
+            "link": m.get("permalink", ""),
+        })
+    st.dataframe(
+        pd.DataFrame(qrows), hide_index=True, use_container_width=True,
+        height=400,
+        column_config={
+            "link": st.column_config.LinkColumn("app", display_text="open"),
+            "quote": st.column_config.TextColumn("quote", width="large"),
+        })
+    fetched = (apple or {}).get("fetched_at") or (play or {}).get("fetched_at")
+    st.caption(f"App-review data fetched: {fetched or 'n/a'}")
+
