@@ -61,3 +61,64 @@ def load_gaps():
 @st.cache_data
 def load_chpl():
     if not os.path.exists(CHPL_DATA_PATH):
+        return None
+    with open(CHPL_DATA_PATH, "r", encoding="utf-8") as fh:
+        return json.load(fh)
+
+
+@st.cache_data
+def load_reviews():
+    if not os.path.exists(REVIEWS_DATA_PATH):
+        return None
+    with open(REVIEWS_DATA_PATH, "r", encoding="utf-8") as fh:
+        return json.load(fh)
+
+
+@st.cache_data
+def load_playstore():
+    if not os.path.exists(PLAYSTORE_DATA_PATH):
+        return None
+    with open(PLAYSTORE_DATA_PATH, "r", encoding="utf-8") as fh:
+        return json.load(fh)
+
+
+@st.cache_data
+def load_matrix():
+    if not os.path.exists(MATRIX_JSON_PATH):
+        return None
+    with open(MATRIX_JSON_PATH, "r", encoding="utf-8") as fh:
+        return json.load(fh)
+
+
+@st.cache_data
+def load_lowstar():
+    if not os.path.exists(LOWSTAR_DATA_PATH):
+        return None
+    with open(LOWSTAR_DATA_PATH, "r", encoding="utf-8") as fh:
+        return json.load(fh)
+
+
+def fmt_epoch(epoch):
+    if not epoch:
+        return "n/a"
+    try:
+        return datetime.fromtimestamp(int(epoch), timezone.utc).strftime("%Y-%m-%d")
+    except (ValueError, OverflowError, OSError):
+        return "n/a"
+
+
+def overview_df(data):
+    """Flat per-EHR dataframe for charts/tables."""
+    rows = []
+    for ehr in data["ehr_order"]:
+        rec = data["ehrs"].get(ehr, {})
+        rows.append({
+            "EHR": ehr,
+            "mentions": rec.get("total", 0),
+            "pct_positive": rec.get("pct_positive", 0.0),
+            "pct_neutral": rec.get("pct_neutral", 0.0),
+            "pct_negative": rec.get("pct_negative", 0.0),
+            "avg_sentiment": rec.get("avg_compound", 0.0),
+            "has_data": rec.get("has_data", False),
+        })
+    return pd.DataFrame(rows)
