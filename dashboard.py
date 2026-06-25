@@ -185,3 +185,67 @@ def view_churn(data):
     if has.empty or has["switching_mentions"].sum() == 0:
         st.info("No switching signals detected.")
         return
+
+    c1, c2 = st.columns(2)
+    with c1:
+        st.subheader("Switching mentions (count)")
+        d1 = has.sort_values("switching_mentions", ascending=True)
+        fig = go.Figure(go.Bar(
+            x=d1["switching_mentions"], y=d1["EHR"], orientation="h",
+            marker_color="#d62728", text=d1["switching_mentions"],
+            textposition="auto"))
+        fig.update_layout(height=380, margin=dict(l=10, r=10, t=10, b=10),
+                          xaxis_title="switching mentions")
+        st.plotly_chart(fig, use_container_width=True)
+    with c2:
+        st.subheader("Churn rate (% of mentions)")
+        st.caption("Normalizes for popularity — better cross-vendor signal.")
+        d2 = has.sort_values("churn_rate_%", ascending=True)
+        fig2 = go.Figure(go.Bar(
+            x=d2["churn_rate_%"], y=d2["EHR"], orientation="h",
+            marker_color="#ff7f0e", text=[f"{v}%" for v in d2["churn_rate_%"]],
+            textposition="auto"))
+        fig2.update_layout(height=380, margin=dict(l=10, r=10, t=10, b=10),
+                           xaxis_title="% of mentions")
+        st.plotly_chart(fig2, use_container_width=True)
+
+    # The actual switching quotes — sales evidence, with links.
+    st.subheader("Switching quotes (sales evidence)")
+    target = st.selectbox("Vendor", [r["EHR"] for r in rows
+                                     if r["has_data"] and r["switching_mentions"]])
+    rec = data["ehrs"].get(target, {})
+    quotes = [m for m in rec.get("mentions", []) if m.get("switching")]
+    quotes.sort(key=lambda m: m.get("score", 0), reverse=True)
+    if not quotes:
+        st.write("No switching quotes for this vendor.")
+    else:
+        qrows = []
+        for m in quotes:
+            text = m["text"].replace("\n", " ").strip()
+            if len(text) > 300:
+                text = text[:300] + "…"
+            qrows.append({
+                "phrase": ", ".join(m.get("switching", [])),
+                "sentiment": m["sentiment"],
+                "score": m.get("score", 0),
+                "subreddit": "r/" + m.get("subreddit", ""),
+                "quote": text,
+                "link": m.get("permalink", ""),
+            })
+        st.dataframe(
+            pd.DataFrame(qrows), hide_index=True, use_container_width=True,
+            height=400,
+            column_config={
+                "link": st.column_config.LinkColumn("thread", display_text="open"),
+                "quote": st.column_config.TextColumn("quote", width="large"),
+            })
+
+
+def view_heatmap(data):
+    st.header("Complaint Heatmap — where the whole market fails")
+    st.caption(
+        "Each cell = share of that vendor's mentions hitting a complaint theme. "
+        "A row (theme) that's hot across ALL vendors = a universal unmet need = "
+        "the market gap MavenMD can own. Read across, not down.")
+
+    themes = data.get("complaint_theme_names", [])
