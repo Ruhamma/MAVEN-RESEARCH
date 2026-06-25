@@ -311,3 +311,66 @@ def _store_avg_rows(store_data, name_key):
     for ehr in store_data.get("ehr_order", []):
         apps = store_data.get("apps", {}).get(ehr, [])
         # Apple uses rating_count; Play search gives only avg per app (weight 1).
+        weights = [(a.get("rating_count") or 1) for a in apps]
+        ratings = [a.get("avg_rating") for a in apps if a.get("avg_rating")]
+        if not ratings:
+            rows[ehr] = None
+            continue
+        tot_w = sum(w for a, w in zip(apps, weights) if a.get("avg_rating"))
+        wavg = sum((a.get("avg_rating") or 0) * w
+                   for a, w in zip(apps, weights) if a.get("avg_rating")) / tot_w
+        rows[ehr] = round(wavg, 2)
+    return rows
+
+
+def view_appstore(data):
+    st.header("App Reviews — official star ratings (free)")
+    apple = load_reviews()
+    play = load_playstore()
+    if apple is None and play is None:
+        st.info(
+            "No app-review data found.\n\n"
+            "Run `python reviews.py` (Apple) and/or `python playstore.py` "
+            "(Google Play) — both free, no key — then `python analyze.py`, "
+            "then reload.")
+        return
+
+    st.caption(
+        "Real customer reviews + 1-5★ from Apple App Store and Google Play "
+        "(free, official). Star ratings are ground-truth to sanity-check the "
+        "automated VADER sentiment.")
+
+    apple_avg = _store_avg_rows(apple, "name")
+    play_avg = _store_avg_rows(play, "title")
+    order = (apple or play).get("ehr_order", [])
+    rows = []
+    for ehr in order:
+        rows.append({
+            "EHR": ehr,
+            "Apple ★": apple_avg.get(ehr),
+            "Google Play ★": play_avg.get(ehr),
+        })
+    df = pd.DataFrame(rows)
+    st.subheader("Official average star rating by store")
+    st.dataframe(df, hide_index=True, use_container_width=True)
+
+    # Grouped bar comparing the two stores.
+    melt = df.melt(id_vars="EHR", value_vars=["Apple ★", "Google Play ★"],
+                   var_name="store", value_name="rating").dropna()
+    if not melt.empty:
+        fig = px.bar(melt, x="rating", y="EHR", color="store",
+                     orientation="h", barmode="group", range_x=[0, 5],
+                     color_discrete_map={"Apple ★": "#1f77b4",
+                                         "Google Play ★": "#2ca02c"})
+        fig.update_layout(height=420, margin=dict(l=10, r=10, t=10, b=10))
+        st.plotly_chart(fig, use_container_width=True)
+
+    # Collect store-review mentions per vendor (Apple + Play).
+    store_label = {"appstore": "Apple", "googleplay": "Google Play"}
+    review_ms = {}
+    for ehr in data["ehr_order"]:
+        ms = [m for m in data["ehrs"].get(ehr, {}).get("mentions", [])
+              if m.get("source") in store_label]
+        if ms:
+            review_ms[ehr] = ms
+    if not review_ms:
