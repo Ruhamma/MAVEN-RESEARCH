@@ -875,3 +875,65 @@ def main():
         "Segment",
         ["EHR Systems", "Telehealth & Home-Care"])
     category = (CATEGORY_EHR if segment == "EHR Systems"
+                else CATEGORY_TELEHEALTH)
+    order = by_cat.get(category) or [
+        e for e in data["ehr_order"]
+        if data["ehrs"].get(e, {}).get("category") == category]
+    # View of the data scoped to the selected segment.
+    data_seg = dict(data)
+    data_seg["ehr_order"] = order
+
+    # View list depends on segment (some views are segment-specific).
+    common = ["Per-System", "App Store", "Pain Points (1–3★)", "Overview",
+              "Churn Signals", "Complaint Heatmap", "Comparison"]
+    if category == CATEGORY_EHR:
+        view_options = common + ["Market Presence", "Gap Analysis"]
+    else:
+        view_options = ["Competitor Matrix"] + common
+    view = st.sidebar.radio("View", view_options)
+
+    st.sidebar.markdown("---")
+    st.sidebar.caption(f"Segment: {segment} ({len(order)} entities)")
+    st.sidebar.caption(f"Data window: {fmt_epoch(data.get('window_after'))} "
+                       f"→ {fmt_epoch(data.get('window_before'))}")
+    st.sidebar.caption(f"Last updated: {data.get('analyzed_at', 'n/a')}")
+    st.sidebar.warning(
+        "⚠️ Reddit signal fluctuates — volume and sentiment swing with a few "
+        "vocal threads and PullPush's shifting coverage. Treat Reddit as "
+        "directional; lean on the more stable star-rated sources (Trustpilot, "
+        "App Store, Google Play) for confidence.")
+
+    if view == "Overview":
+        view_overview(data_seg)
+    elif view == "Churn Signals":
+        view_churn(data_seg)
+    elif view == "Complaint Heatmap":
+        view_heatmap(data_seg)
+    elif view == "Per-System":
+        view_per_system(data_seg)
+    elif view == "Comparison":
+        view_comparison(data_seg)
+    elif view == "App Store":
+        view_appstore(data_seg)
+    elif view == "Market Presence":
+        view_market_presence(data_seg)
+    elif view == "Gap Analysis":
+        view_gap_analysis(data_seg)
+    elif view == "Competitor Matrix":
+        view_competitor_matrix(data_seg)
+    elif view == "Pain Points (1–3★)":
+        view_lowstar(data_seg)
+
+    # Footer disclaimer (every view).
+    st.markdown("---")
+    st.caption(
+        "**Disclaimer:** Data is public discussion from Reddit (PullPush), the "
+        "Apple App Store, Google Play, and any imported review CSVs. Sentiment "
+        "is automated (VADER) and should be spot-checked — sarcasm, context, and "
+        "jargon can fool it. Volume varies widely by platform popularity, so "
+        "cross-entity comparisons of low-volume names are unreliable. For "
+        "competitive research only, not an endorsement.")
+
+
+if __name__ == "__main__":
+    main()
