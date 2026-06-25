@@ -813,3 +813,65 @@ def view_lowstar(data):
             "stars": r.get("star"),
             "complaints": ", ".join(r.get("complaints", [])) or "—",
             "review": text,
+            "link": r.get("permalink", ""),
+        })
+    if rows:
+        st.dataframe(
+            pd.DataFrame(rows), hide_index=True, use_container_width=True,
+            height=420,
+            column_config={
+                "link": st.column_config.LinkColumn("source", display_text="open"),
+                "review": st.column_config.TextColumn("review", width="large"),
+            })
+    st.caption(f"Low-star data scraped: {low.get('fetched_at', 'n/a')}")
+
+
+def view_competitor_matrix(data):
+    st.header("Competitor Matrix — Telehealth & Home-Care landscape")
+    matrix = load_matrix()
+    if matrix is None:
+        st.info("Competitor matrix not found. Run `python competitors.py` to "
+                "generate it from competitor_matrix.xlsx.")
+        return
+    st.caption("Source: competitor_matrix.xlsx. The ~32 telehealth / home-care "
+               "platforms benchmarked against your build.")
+
+    sheets = matrix.get("sheets", {})
+    names = list(sheets.keys())
+    if not names:
+        st.warning("No sheets parsed from the matrix.")
+        return
+    tab_objs = st.tabs(names)
+    for tab, name in zip(tab_objs, names):
+        with tab:
+            sh = sheets[name]
+            cols = sh.get("columns", [])
+            rows = sh.get("rows", [])
+            if not cols:
+                st.write("Empty sheet.")
+                continue
+            df = pd.DataFrame(rows, columns=cols)
+            st.dataframe(df, hide_index=True, use_container_width=True,
+                         height=min(620, 60 + 28 * len(rows)))
+
+
+# --------------------------------------------------------------------------- #
+# Main
+# --------------------------------------------------------------------------- #
+
+def main():
+    st.sidebar.title("EHR Market Research")
+    data = load_analyzed()
+
+    if data is None:
+        st.title("EHR Market Research Dashboard")
+        st.error("data/analyzed_data.json not found. "
+                 "Run `python fetch.py` then `python analyze.py` first.")
+        return
+
+    # Segment toggle: EHR systems vs telehealth / home-care competitors.
+    by_cat = data.get("ehr_order_by_category", {})
+    segment = st.sidebar.radio(
+        "Segment",
+        ["EHR Systems", "Telehealth & Home-Care"])
+    category = (CATEGORY_EHR if segment == "EHR Systems"
