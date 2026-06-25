@@ -625,3 +625,65 @@ def view_per_system(data):
             comp_df = pd.DataFrame(rec["top_complaints"],
                                    columns=["theme", "count"])
             st.dataframe(comp_df, hide_index=True, use_container_width=True)
+        else:
+            st.write("— none detected —")
+
+        st.subheader("Top praises")
+        if rec["top_praises"]:
+            praise_df = pd.DataFrame(rec["top_praises"],
+                                     columns=["theme", "count"])
+            st.dataframe(praise_df, hide_index=True, use_container_width=True)
+        else:
+            st.write("— none detected —")
+
+    # Sample quotes with clickable links (anonymized — no usernames).
+    st.subheader("Sample quotes")
+    st.caption("App Store reviews first, then Google Play, then Reddit. "
+               "Public content, usernames omitted. Click to open.")
+
+    mentions = rec.get("mentions", [])
+    sent_filter = st.multiselect(
+        "Filter by sentiment",
+        ["positive", "neutral", "negative"],
+        default=["positive", "neutral", "negative"])
+    filtered = [m for m in mentions if m["sentiment"] in sent_filter]
+    # Order: App Store -> Google Play -> manual -> Reddit; within each, by
+    # engagement (score) descending.
+    filtered.sort(key=lambda m: (source_rank(m.get("source")),
+                                 -(m.get("score", 0) or 0)))
+
+    if not filtered:
+        st.write("No quotes match the filter.")
+    else:
+        quote_rows = []
+        for m in filtered:
+            text = m["text"].replace("\n", " ").strip()
+            if len(text) > 280:
+                text = text[:280] + "…"
+            quote_rows.append({
+                "source": source_label(m),
+                "sentiment": m["sentiment"],
+                "stars": m.get("star_rating") if m.get("star_rating") else "",
+                "score": m.get("score", 0),
+                "quote": text,
+                "link": m.get("permalink", ""),
+            })
+        quote_df = pd.DataFrame(quote_rows)
+        st.dataframe(
+            quote_df,
+            hide_index=True,
+            use_container_width=True,
+            height=420,
+            column_config={
+                "link": st.column_config.LinkColumn("link", display_text="open"),
+                "quote": st.column_config.TextColumn("quote", width="large"),
+            },
+        )
+
+
+def view_comparison(data):
+    st.header("Comparison — all EHRs")
+
+    rows = []
+    for ehr in data["ehr_order"]:
+        rec = data["ehrs"].get(ehr, {})
