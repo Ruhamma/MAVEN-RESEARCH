@@ -750,3 +750,66 @@ def view_lowstar(data):
     seg = set(data.get("ehr_order", []))
     entities = {k: v for k, v in low.get("entities", {}).items()
                 if (not seg) or k in seg}
+    entities = {k: v for k, v in entities.items() if v.get("count")}
+    if not entities:
+        st.warning("No low-star reviews for this segment yet.")
+        return
+
+    # Aggregate complaint themes across the whole segment (the market-wide pain).
+    seg_counter = Counter()
+    for v in entities.values():
+        for theme, n in v.get("top_complaints", []):
+            seg_counter[theme] += n
+    if seg_counter:
+        st.subheader("Most common complaints across this segment (1–3★)")
+        cdf = pd.DataFrame(seg_counter.most_common(10),
+                           columns=["complaint theme", "low-star mentions"])
+        d = cdf.sort_values("low-star mentions", ascending=True)
+        fig = go.Figure(go.Bar(
+            x=d["low-star mentions"], y=d["complaint theme"], orientation="h",
+            marker_color="#d62728", text=d["low-star mentions"],
+            textposition="auto"))
+        fig.update_layout(height=380, margin=dict(l=10, r=10, t=10, b=10))
+        st.plotly_chart(fig, use_container_width=True)
+        top = seg_counter.most_common(1)[0]
+        st.success(f"**Biggest pain point in this segment:** `{top[0]}` "
+                   f"({top[1]} low-star mentions). Lead with the fix here.")
+
+    # Per-entity breakdown.
+    st.subheader("By competitor")
+    pick = st.selectbox("Select competitor", sorted(entities.keys()))
+    rec = entities[pick]
+    c1, c2 = st.columns([1, 1])
+    c1.metric("1–3★ reviews", rec.get("count", 0))
+    c2.metric("avg star (of these)", rec.get("avg_star") or "—")
+
+    if rec.get("top_complaints"):
+        st.markdown(f"**Why people give {pick} 1–3★** — complaint themes in its "
+                    "low-star reviews:")
+        edf = pd.DataFrame(rec["top_complaints"],
+                           columns=["complaint theme", "mentions"])
+        d = edf.sort_values("mentions", ascending=True)
+        fig = go.Figure(go.Bar(
+            x=d["mentions"], y=d["complaint theme"], orientation="h",
+            marker_color="#e45756", text=d["mentions"], textposition="auto"))
+        fig.update_layout(height=320, margin=dict(l=10, r=10, t=10, b=10),
+                          xaxis_title="low-star reviews mentioning theme")
+        st.plotly_chart(fig, use_container_width=True)
+        # Share-of-pain: this theme's weight vs the segment average.
+        top_theme, top_n = rec["top_complaints"][0]
+        share = round(100.0 * top_n / rec["count"], 0) if rec.get("count") else 0
+        st.success(f"**{pick}'s #1 driver of 1–3★:** `{top_theme}` — in "
+                   f"~{share:.0f}% of its low-star reviews.")
+    else:
+        st.write("No complaint themes detected in the low-star text.")
+
+    st.markdown("**Sample 1–3★ reviews** (worst first):")
+    rows = []
+    for r in rec.get("reviews", []):
+        text = (r.get("text") or "").replace("\n", " ").strip()
+        if len(text) > 300:
+            text = text[:300] + "…"
+        rows.append({
+            "stars": r.get("star"),
+            "complaints": ", ".join(r.get("complaints", [])) or "—",
+            "review": text,
