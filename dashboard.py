@@ -122,3 +122,66 @@ def overview_df(data):
             "has_data": rec.get("has_data", False),
         })
     return pd.DataFrame(rows)
+
+
+def top_theme_label(theme_list):
+    if not theme_list:
+        return "—"
+    name, count = theme_list[0]
+    return f"{name} ({count})"
+
+
+# Source ordering for mixed-source quote tables:
+# Trustpilot first, then App Store, Google Play, manual; Reddit always last.
+_SOURCE_RANK = {"trustpilot": 0, "appstore": 1, "googleplay": 2,
+                "manual": 3, "reddit": 4}
+
+
+def source_rank(source):
+    s = (source or "reddit")
+    base = s.split(":", 1)[0]   # "manual:G2" -> "manual"
+    return _SOURCE_RANK.get(base, 4)
+
+
+def source_label(m):
+    s = m.get("source") or "reddit"
+    if s == "appstore":
+        return "App Store"
+    if s == "googleplay":
+        return "Google Play"
+    if s == "trustpilot":
+        return "Trustpilot"
+    if s.startswith("manual"):
+        return s.split(":", 1)[1] if ":" in s else "manual"
+    return "r/" + m.get("subreddit", "")
+
+
+# --------------------------------------------------------------------------- #
+# Views
+# --------------------------------------------------------------------------- #
+
+def view_churn(data):
+    st.header("Churn Signals — who's bleeding customers")
+    st.caption(
+        "Mentions containing switching/leaving language (\"switching from\", "
+        "\"looking for an alternative to\", \"fed up with\"…). High counts = "
+        "active buyers leaving that vendor → MavenMD's poaching targets.")
+
+    rows = []
+    for ehr in data["ehr_order"]:
+        rec = data["ehrs"].get(ehr, {})
+        total = rec.get("total", 0)
+        sc = rec.get("switching_count", 0)
+        rows.append({
+            "EHR": ehr,
+            "switching_mentions": sc,
+            "total": total,
+            "churn_rate_%": round(100.0 * sc / total, 1) if total else 0.0,
+            "has_data": rec.get("has_data", False),
+        })
+    df = pd.DataFrame(rows)
+    has = df[df["has_data"]]
+
+    if has.empty or has["switching_mentions"].sum() == 0:
+        st.info("No switching signals detected.")
+        return
